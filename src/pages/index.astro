@@ -1,5 +1,5 @@
 ---
-// Component imports and setup JavaScript go here!
+import restaurants from '../data/restaurants.json';
 ---
 
 <html lang="en">
@@ -15,6 +15,9 @@
 	</head>
 
 	<body>
-		<h1>Welcome to <a href="https://astro.build/">Astro</a></h1>
+		<h1>Del Ray Eats</h1>
+		<ul>
+			{restaurants.map(restaurant => (<li>{restaurant.name}</li>))}
+		</ul>
 	</body>
 </html>
