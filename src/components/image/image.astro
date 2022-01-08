@@ -11,6 +11,7 @@ const sources = images.formats.flatMap(format => {
 <picture>
   {sources.map(source => <Source slug={slug} format={source.format} width={source.width} height={source.height} />)}
   <img
+    class="rounded-t-md"
     src={`/images/${slug}-200-150.jpg`}
     alt={alt}
     loading="lazy"
