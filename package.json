@@ -4,11 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
+    "start": "npm run build:images && astro dev",
+    "build": "npm run build:*",
+    "build:astro": "astro build",
+    "build:images": "node ./scripts/imagesProcessing.js",
     "preview": "astro preview"
   },
   "devDependencies": {
-    "astro": "^0.22.9"
+    "astro": "^0.22.9",
+    "fs-extra": "^10.0.0",
+    "sharp": "^0.29.3"
   }
 }
