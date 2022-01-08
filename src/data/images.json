@@ -1,5 +1,5 @@
 {
-  "formats": ["jpg", "webp", "avif"],
+  "formats": ["avif", "jpg", "webp"],
   "resolutions": [
     [1280, 960],
     [640, 480],

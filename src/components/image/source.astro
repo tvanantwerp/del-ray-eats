@@ -1,0 +1,9 @@
+---
+const {slug, format, width, height} = Astro.props
+---
+
+<source
+  type={`image/${format === 'jpg' ? 'jpeg' : format}`}
+  srcset={`/images/${slug}-${width}-${height}.${format} ${width}w`}
+  media={`(min-width: ${width}px)`}
+/>

@@ -1,0 +1,20 @@
+---
+import Image from './image/image.astro';
+import Button from './button.astro';
+const {restaurant} = Astro.props;
+---
+
+<article>
+  <Image slug={restaurant.slug} alt={`Exterior of ${restaurant.name}.`} />
+  <h1>
+    {restaurant.name}
+  </h1>
+  <div>
+    <Button href={restaurant.website} external>
+      Website
+    </Button>
+    <Button href={restaurant.onlineOrderUrl} external>
+      Order Now
+    </Button>
+  </div>
+</article>
