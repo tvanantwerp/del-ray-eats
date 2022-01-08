@@ -1,31 +1,20 @@
 ---
 import restaurants from '../data/restaurants.json';
 import images from '../data/images.json';
+
+import BaseLayout from '../layouts/base.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<title>Welcome to Astro</title>
-		<style>
-			/* scoped CSS styles go here: */
-			/* h1 { ... } */
-		</style>
-	</head>
-
-	<body>
-		<h1>Del Ray Eats</h1>
-		<ul>
-			{restaurants.map(restaurant => (<li>
-				<article>
-					<img src={`/images/${restaurant.slug}-200-150.jpg`} />
-					<h1>
-						{restaurant.name}
-					</h1>
-				</article>
-			</li>))}
-		</ul>
-	</body>
-</html>
+<BaseLayout>
+	<h1>Del Ray Eats</h1>
+	<ul>
+		{restaurants.map(restaurant => (<li>
+			<article>
+				<img src={`/images/${restaurant.slug}-200-150.jpg`} />
+				<h1>
+					{restaurant.name}
+				</h1>
+			</article>
+		</li>))}
+	</ul>
+</BaseLayout>
