@@ -2,13 +2,13 @@
   {
     "name": "Lena's Wood-Fired Pizza & Tap",
     "slug": "lenas",
-    "website": "https://www.lenaswoodfire.com/",
+    "website": "https://www.lenaswoodfire.com/menus",
     "onlineOrderUrl": "https://direct.chownow.com/order/11242/locations/15538"
   },
   {
     "name": "South China Restaurant",
     "slug": "south-china",
-    "website": "https://www.southchinaalexandria.com/",
+    "website": "https://www.southchinaalexandria.com/menu.aspx",
     "onlineOrderUrl": "https://www.beyondmenu.com/20177/alexandria/south-china-restaurant-alexandria-22301.aspx?utm_source=satellite&utm_medium=home_order&pk_vid=91725f268b627168164166810786664f"
   },
   {
@@ -20,7 +20,7 @@
   {
     "name": "Sicilian Pizza",
     "slug": "sicilian-pizza",
-    "website": "https://www.alexandriasicilianpizza.com/",
+    "website": "https://www.alexandriasicilianpizza.com/menu.aspx",
     "onlineOrderUrl": "https://www.beyondmenu.com/21396/alexandria/sicilian-pizza-alexandria-22301.aspx?utm_source=satellite&utm_medium=top_banner&pk_vid=8f7b184cc016007c164169359386664f"
   },
   {
@@ -38,13 +38,13 @@
   {
     "name": "Kaizen",
     "slug": "kaizen",
-    "website": "https://www.kaizen-tavern.com/",
+    "website": "https://www.kaizen-tavern.com/menu.html",
     "onlineOrderUrl": "https://onlineordering.rmpos.com/Order/(S(fpwzgt1dlcbe3xcau4rwi12v))/?wci=h5cFapXS"
   },
   {
     "name": "Del Ray Café",
     "slug": "del-ray-cafe",
-    "website": "https://www.delraycafe.com/",
+    "website": "https://www.delraycafe.com/our-menus/",
     "onlineOrderUrl": "https://www.delraycafe.com/order-online/"
   },
   {
@@ -56,19 +56,19 @@
   {
     "name": "Thai Peppers",
     "slug": "thai-peppers",
-    "website": "https://www.thaipeppersalexandria.com/",
+    "website": "https://www.thaipeppersalexandria.com/menu",
     "onlineOrderUrl": "https://www.thaipeppersalexandria.com/takeout-food-delivery"
   },
   {
     "name": "Del Ray Pizzeria",
     "slug": "del-ray-pizzeria",
-    "website": "http://www.delraypizzeria.com/",
+    "website": "http://www.delraypizzeria.com/#menus",
     "onlineOrderUrl": "https://www.toasttab.com/del-ray-pizzeria/v3/?mode=fulfillment"
   },
   {
     "name": "Market 2 Market ",
     "slug": "market-2-market",
-    "website": "https://www.m2mdelray.com/",
+    "website": "https://www.m2mdelray.com/the-food",
     "onlineOrderUrl": "https://www.toasttab.com/st-elmos-coffee-pub-market/v3/?mode=fulfillment"
   },
   {
@@ -110,7 +110,7 @@
   {
     "name": "Piece Out Del Ray",
     "slug": "piece-out",
-    "website": "https://www.pieceoutdelray.com/",
+    "website": "https://www.pieceoutdelray.com/menu",
     "onlineOrderUrl": "https://www.toasttab.com/pieceout/v3/?mode=fulfillment"
   }
 ]
