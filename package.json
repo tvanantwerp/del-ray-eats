@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "npm run build:images && astro dev",
-    "build": "run-p build:* --print-label",
+    "build": "npm run build:images && npm run build:astro",
     "build:astro": "astro build",
     "build:images": "node ./src/scripts/imagesProcessing.js",
     "preview": "astro preview"
