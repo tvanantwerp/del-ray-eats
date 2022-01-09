@@ -19,7 +19,9 @@
   },
   {
     "name": "Sicilian Pizza",
-    "website": "https://www.alexandriasicilianpizza.com/"
+    "slug": "sicilian-pizza",
+    "website": "https://www.alexandriasicilianpizza.com/",
+    "onlineOrderUrl": "https://www.beyondmenu.com/21396/alexandria/sicilian-pizza-alexandria-22301.aspx?utm_source=satellite&utm_medium=top_banner&pk_vid=8f7b184cc016007c164169359386664f"
   },
   {
     "name": "Junction Bakery & Bistro",
@@ -62,5 +64,53 @@
     "slug": "del-ray-pizzeria",
     "website": "http://www.delraypizzeria.com/",
     "onlineOrderUrl": "https://www.toasttab.com/del-ray-pizzeria/v3/?mode=fulfillment"
+  },
+  {
+    "name": "Market 2 Market ",
+    "slug": "market-2-market",
+    "website": "https://www.m2mdelray.com/",
+    "onlineOrderUrl": "https://www.toasttab.com/st-elmos-coffee-pub-market/v3/?mode=fulfillment"
+  },
+  {
+    "name": "St. Elmo's Coffee Pub",
+    "slug": "st-elmos",
+    "website": "https://www.stelmoscoffeepub.com/",
+    "onlineOrderUrl": "https://www.toasttab.com/st-elmos-coffee-pub-market/v3/?mode=fulfillment"
+  },
+  {
+    "name": "Bagel Uprising",
+    "slug": "bagel-uprising",
+    "website": "http://bageluprising.com/",
+    "onlineOrderUrl": "https://bagel-uprising.square.site/"
+  },
+  {
+    "name": "Stomping Ground",
+    "slug": "stomping-ground",
+    "website": "https://www.stompdelray.com/",
+    "onlineOrderUrl": "https://www.stompdelray.com/s/order?location=11ea194c8c3248dba2130cc47a2ae378"
+  },
+  {
+    "name": "Holy Cow",
+    "slug": "holy-cow",
+    "website": "https://holycowdelray.com/",
+    "onlineOrderUrl": "https://www.toasttab.com/holy-cow-del-ray/v3/?mode=fulfillment"
+  },
+  {
+    "name": "Pork Barrel BBQ",
+    "slug": "pork-barrel-bbq",
+    "website": "https://bbqdelray.com/",
+    "onlineOrderUrl": "https://www.toasttab.com/pork-barrel-bbq/v3/?mode=fulfillment"
+  },
+  {
+    "name": "Cheesetique Del Ray",
+    "slug": "cheesetique",
+    "website": "https://www.cheesetique.com/menus/",
+    "onlineOrderUrl": "https://cheesetique.square.site/s/order/11"
+  },
+  {
+    "name": "Piece Out Del Ray",
+    "slug": "piece-out",
+    "website": "https://www.pieceoutdelray.com/",
+    "onlineOrderUrl": "https://www.toasttab.com/pieceout/v3/?mode=fulfillment"
   }
 ]
