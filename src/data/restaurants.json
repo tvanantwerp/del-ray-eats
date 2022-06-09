@@ -12,6 +12,18 @@
     "onlineOrderUrl": "https://www.beyondmenu.com/20177/alexandria/south-china-restaurant-alexandria-22301.aspx?utm_source=satellite&utm_medium=home_order&pk_vid=91725f268b627168164166810786664f"
   },
   {
+    "name": "Bella Napoli Restaurant",
+    "slug": "bella-napoli",
+    "website": "https://slicelife.com/restaurants/va/alexandria/22301/bella-napoli-italian-restaurant/menu?utm_campaign=direct_websites&ajs_aid=&client_id=",
+    "onlineOrderUrl": "https://slicelife.com/restaurants/va/alexandria/22301/bella-napoli-italian-restaurant/menu?utm_campaign=direct_websites"
+  },
+  {
+    "name": "Matt & Tony's All Day Kitchen + Bar",
+    "slug": "matt-and-tonys",
+    "website": "https://mattandtonysva.com/food-drink/",
+    "onlineOrderUrl": "https://www.opentable.com/r/matt-and-tonys-all-day-kitchen-and-bar-alexandria"
+  },
+  {
     "name": "Al's Steak House",
     "slug": "als-steak-house",
     "website": "https://www.alssteakhouseva.com/",
