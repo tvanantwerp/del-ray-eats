@@ -124,5 +124,29 @@
     "slug": "piece-out",
     "website": "https://www.pieceoutdelray.com/menu",
     "onlineOrderUrl": "https://www.toasttab.com/pieceout/v3/?mode=fulfillment"
+  },
+  {
+    "name": "Tsim Yung Chinese",
+    "slug": "tsim-yung-chinese",
+    "website": "https://www.tsimyungva.com/",
+    "onlineOrderUrl": "https://www.tsimyungva.com/menu"
+  },
+  {
+    "name": "Spice Kraft",
+    "slug": "spice-kraft",
+    "website": "https://www.spicekraftva.com/menu-alexandria-arlington",
+    "onlineOrderUrl": "https://jmj-hospitality-llc.square.site/"
+  },
+  {
+    "name": "Los Tios Grill",
+    "slug": "los-tios-grill",
+    "website": "https://lostiosgrill.com/del-ray/",
+    "onlineOrderUrl": "https://www.clover.com/online-ordering/los-tios-grill-restauran-alexandria"
+  },
+  {
+    "name": "Stracci Pizza",
+    "slug": "stracci-pizza",
+    "website": "https://www.straccipizza.com/",
+    "onlineOrderUrl": "https://www.toasttab.com/straccipizza/v3"
   }
 ]
