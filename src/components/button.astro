@@ -1,8 +1,24 @@
 ---
 const {href, external, inverted} = Astro.props
-const sharedStyles = "border border-indigo-600 cursor-pointer font-semibold font-sans leading-5 px-4 py-2 rounded-full text-center text-md text-center grid place-content-center";
-const regularStyles = "bg-indigo-600 text-white";
-const invertedStyles = "bg-white text-indigo-600";
+const sharedStyles = `
+  border
+  border-emerald-700
+  hover:border-emerald-800
+  cursor-pointer
+  font-semibold
+  font-sans
+  leading-5
+  px-4
+  py-2
+  rounded-2xl
+  text-center
+  text-md
+  text-center
+  grid
+  place-content-center
+  transition-all`;
+const regularStyles = "bg-emerald-700 hover:bg-emerald-800 text-white";
+const invertedStyles = "bg-white text-emerald-700 hover:text-emerald-800";
 const styles = inverted ? `${sharedStyles} ${invertedStyles}` : `${sharedStyles} ${regularStyles}`;
 ---
 

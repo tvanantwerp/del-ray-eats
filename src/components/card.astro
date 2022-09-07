@@ -4,15 +4,15 @@ import Button from './button.astro';
 const {restaurant} = Astro.props;
 ---
 
-<article class="grid rounded-lg drop-shadow-xl h-full" style="grid-template-rows: auto 1fr;">
+<article class="grid rounded-lg drop-shadow-lg h-full" style="grid-template-rows: auto 1fr;">
   <Image slug={restaurant.slug} alt={`Exterior of ${restaurant.name}.`} />
-  <div class="grid items-end bg-white drop-shadow-xl rounded-2xl -mt-8">
+  <div class="grid items-end bg-white drop-shadow-xl rounded-xl -mt-8">
     <h1 class="font-heading text-xl text-center text-slate-800 p-4">
       {restaurant.name}
     </h1>
     <div class="grid grid-cols-2 justify-items-stretch gap-4 px-4 pb-4">
       <Button href={restaurant.website} external inverted>
-        Menu
+        Visit Website
       </Button>
       <Button href={restaurant.onlineOrderUrl} external>
         Order Now
