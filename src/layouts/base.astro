@@ -1,18 +1,24 @@
 ---
-  const {title} = Astro.props
+const { title } = Astro.props;
 ---
+
 <html>
   <head>
-    <title>{title ? `${title} | Del Ray Eats` : "Del Ray Eats"}</title>
+    <title>{title ? `${title} | Del Ray Eats` : 'Del Ray Eats'}</title>
     <meta charset="utf-8" />
-		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Poppins:wght@300;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href={Astro.resolve('../styles/global.css')}>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Poppins:wght@300;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href={Astro.resolve('../styles/global.css')} />
   </head>
-  <body class="font-sans font-light grid grid-cols-1 justify-items-center bg-gradient-to-br from-slate-50 to-zinc-50 min-h-screen">
+  <body
+    class="font-sans font-light grid grid-cols-1 justify-items-center bg-gradient-to-br from-slate-50 to-zinc-50 min-h-screen"
+  >
     <div class="p-8 max-w-screen-2xl">
       <slot />
     </div>

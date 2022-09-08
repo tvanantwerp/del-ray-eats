@@ -1,40 +1,21 @@
 ---
 import Image from './image/image.astro';
 import Button from './button.astro';
-const {restaurant} = Astro.props;
+const { restaurant } = Astro.props;
 ---
 
-<article class="
-  grid
-  drop-shadow-md
-  hover:drop-shadow-lg
-  hover:scale-105
-  transition-all
-  h-full
-  border
-  border-slate-500
-  rounded-lg
-  "
+<article
+  class="grid drop-shadow-md hover:drop-shadow-lg hover:scale-105 transition-all h-full border border-slate-500 rounded-lg"
   style="grid-template-rows: auto 1fr;"
 >
   <Image slug={restaurant.slug} alt={`Exterior of ${restaurant.name}.`} />
-  <div class="
-    grid
-    items-end
-    rounded-b-lg
-    bg-white
-    -mt-8
-  ">
+  <div class="grid items-end rounded-b-lg bg-white -mt-8">
     <h1 class="font-heading text-xl text-center text-slate-800 p-4">
       {restaurant.name}
     </h1>
     <div class="grid grid-cols-2 justify-items-stretch gap-4 px-4 pb-4">
-      <Button href={restaurant.website} external inverted>
-        Visit Website
-      </Button>
-      <Button href={restaurant.onlineOrderUrl} external>
-        Order Now
-      </Button>
+      <Button href={restaurant.website} external inverted>Visit Website</Button>
+      <Button href={restaurant.onlineOrderUrl} external>Order Now</Button>
     </div>
   </div>
 </article>

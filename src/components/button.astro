@@ -1,5 +1,5 @@
 ---
-const {href, external, inverted} = Astro.props
+const { href, external, inverted } = Astro.props;
 const sharedStyles = `
   border
   border-slate-700
@@ -17,15 +17,18 @@ const sharedStyles = `
   grid
   place-content-center
   transition-all`;
-const regularStyles = "bg-slate-700 hover:bg-slate-800 text-white";
-const invertedStyles = "bg-white text-slate-700 hover:text-slate-800";
-const styles = inverted ? `${sharedStyles} ${invertedStyles}` : `${sharedStyles} ${regularStyles}`;
+const regularStyles = 'bg-slate-700 hover:bg-slate-800 text-white';
+const invertedStyles = 'bg-white text-slate-700 hover:text-slate-800';
+const styles = inverted
+  ? `${sharedStyles} ${invertedStyles}`
+  : `${sharedStyles} ${regularStyles}`;
 ---
 
 <a
   class={styles}
   href={href}
-  rel={external ? "noopener noreferrer" : undefined}
-  target={external ? "_blank" : undefined}>
+  rel={external ? 'noopener noreferrer' : undefined}
+  target={external ? '_blank' : undefined}
+>
   <slot />
 </a>
