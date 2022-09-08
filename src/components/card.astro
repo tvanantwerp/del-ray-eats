@@ -9,8 +9,10 @@ const { restaurant } = Astro.props;
   style="grid-template-rows: auto 1fr;"
 >
   <Image slug={restaurant.slug} alt={`Exterior of ${restaurant.name}.`} />
-  <div class="grid items-end rounded-b-lg bg-white -mt-8">
-    <h1 class="font-heading text-xl text-center text-slate-800 p-4">
+  <div class="grid items-end rounded-b-lg bg-white dark:bg-slate-800 -mt-8">
+    <h1
+      class="font-heading text-xl text-center text-slate-800 dark:text-slate-100 p-4"
+    >
       {restaurant.name}
     </h1>
     <div class="grid grid-cols-2 justify-items-stretch gap-4 px-4 pb-4">

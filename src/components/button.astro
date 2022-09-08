@@ -3,7 +3,9 @@ const { href, external, inverted } = Astro.props;
 const sharedStyles = `
   border
   border-slate-700
+  dark:border-slate-100
   hover:border-slate-800
+  dark:hover:border-slate-200
   cursor-pointer
   font-semibold
   font-sans
@@ -17,8 +19,18 @@ const sharedStyles = `
   grid
   place-content-center
   transition-all`;
-const regularStyles = 'bg-slate-700 hover:bg-slate-800 text-white';
-const invertedStyles = 'bg-white text-slate-700 hover:text-slate-800';
+const regularStyles = `bg-slate-700
+  hover:bg-slate-800
+  text-white
+  dark:bg-slate-100
+  dark:hover:bg-slate-100
+  dark:text-slate-800`;
+const invertedStyles = `bg-white
+  text-slate-700
+  hover:text-slate-800
+  dark:bg-slate-800
+  dark:text-slate-200
+  dark:hover:text-slate-100`;
 const styles = inverted
   ? `${sharedStyles} ${invertedStyles}`
   : `${sharedStyles} ${regularStyles}`;
