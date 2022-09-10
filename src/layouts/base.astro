@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 const { title } = Astro.props;
 ---
 
@@ -14,7 +16,6 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Poppins:wght@300;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href={Astro.resolve('../styles/global.css')} />
   </head>
   <body
     class="font-sans font-light grid grid-cols-1 justify-items-center bg-gradient-to-br from-slate-50 to-zinc-50 dark:from-slate-800 dark:to-slate-700 min-h-screen"
