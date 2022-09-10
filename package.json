@@ -13,6 +13,7 @@
   "devDependencies": {
     "@astrojs/react": "^1.1.2",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+    "@types/react": "^18.0.18",
     "astro": "^1.2.1",
     "autoprefixer": "^10.4.8",
     "cssnano": "^5.1.13",
