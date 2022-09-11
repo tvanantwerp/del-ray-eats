@@ -30,6 +30,7 @@ export const Image = ({ alt, slug }: ImageProps) => (
   <picture>
     {sources.map(source => (
       <Source
+        key={`${slug}-${source.format}-${source.width}-${source.height}`}
         slug={slug}
         format={source.format}
         width={source.width!}
