@@ -13,12 +13,13 @@ const { restaurant } = Astro.props;
   <Picture
     src={import(`../assets/images/${restaurant.slug}.png`)}
     alt={`Exterior of ${restaurant.name}`}
-    sizes={[400,640,800]}
-    widths={[400, 640, 800]}
+    sizes="400px"
+    widths={[400]}
     aspectRatio={4/3}
     formats={['avif', 'webp', 'jpeg']}
     fit="cover"
     position="center"
+    class="rounded-t-lg"
   />
   <div class="grid items-end rounded-b-lg bg-white dark:bg-slate-800 -mt-8">
     <h1
