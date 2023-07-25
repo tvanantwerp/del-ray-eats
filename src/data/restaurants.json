@@ -78,6 +78,12 @@
     "onlineOrderUrl": "https://www.toasttab.com/del-ray-pizzeria/v3/?mode=fulfillment"
   },
   {
+    "name": "Gustave Boulangerie",
+    "slug": "gustave-boulangerie",
+    "website": "https://gustaveboulangerie.com/",
+    "onlineOrderUrl": "https://gustaveboulangerie.com/"
+  },
+  {
     "name": "Market 2 Market ",
     "slug": "market-2-market",
     "website": "https://www.m2mdelray.com/the-food",
@@ -96,10 +102,10 @@
     "onlineOrderUrl": "https://bagel-uprising.square.site/"
   },
   {
-    "name": "Stomping Ground",
-    "slug": "stomping-ground",
-    "website": "https://www.stompdelray.com/",
-    "onlineOrderUrl": "https://www.stompdelray.com/s/order?location=11ea194c8c3248dba2130cc47a2ae378"
+    "name": "Rubia's Tacos",
+    "slug": "rubias-tacos",
+    "website": "https://rubiastacos.com/",
+    "onlineOrderUrl": "https://my-business-105329.square.site/"
   },
   {
     "name": "Holy Cow",
