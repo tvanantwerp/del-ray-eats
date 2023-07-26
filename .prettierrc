@@ -10,6 +10,7 @@
   "importOrderSortSpecifiers": true,
   "insertPragma": false,
   "jsxSingleQuote": false,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
   "printWidth": 80,
   "proseWrap": "preserve",
   "quoteProps": "as-needed",

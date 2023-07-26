@@ -1,6 +1,7 @@
 ---
+import { Picture } from '@astrojs/image/components';
+
 import Button from './button.astro';
-import { Image } from './image';
 
 const { restaurant } = Astro.props;
 ---
@@ -9,7 +10,17 @@ const { restaurant } = Astro.props;
   class="grid drop-shadow-md hover:drop-shadow-lg hover:scale-105 transition-all h-full border border-slate-500 rounded-lg"
   style="grid-template-rows: auto 1fr;"
 >
-  <Image slug={restaurant.slug} alt={`Exterior of ${restaurant.name}.`} />
+  <Picture
+    src={import(`../assets/images/${restaurant.slug}.png`)}
+    alt={`Exterior of ${restaurant.name}`}
+    sizes="400px"
+    widths={[400]}
+    aspectRatio={4/3}
+    formats={['avif', 'webp', 'jpeg']}
+    fit="cover"
+    position="center"
+    class="rounded-t-lg"
+  />
   <div class="grid items-end rounded-b-lg bg-white dark:bg-slate-800 -mt-8">
     <h1
       class="font-heading text-xl text-center text-slate-800 dark:text-slate-100 p-4"
