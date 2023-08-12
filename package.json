@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run build:astro",
-    "build:astro": "astro build",
+    "build": "astro build && npm run generateSW",
+    "generateSW": "SW_DIST_PATH=dist/ workbox generateSW workbox.config.cjs",
     "preview": "astro preview"
   },
   "devDependencies": {
