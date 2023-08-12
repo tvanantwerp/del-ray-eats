@@ -16,6 +16,21 @@ const { title } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&family=Poppins:wght@300;800&display=swap"
       rel="stylesheet"
     />
+    <script is:inline>
+      addEventListener("load", () => {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then(() => {
+              console.log("Service Worker Registered");
+            })
+            .catch((err) => {
+              console.log("Some error occurred while registering service worker");
+              console.log(err);
+            });
+        }
+      });
+    </script>
   </head>
   <body
     class="font-sans font-light grid grid-cols-1 justify-items-center bg-gradient-to-br from-slate-50 to-zinc-50 dark:from-slate-800 dark:to-slate-700 min-h-screen"

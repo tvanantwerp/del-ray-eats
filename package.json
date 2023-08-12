@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run build:astro",
-    "build:astro": "astro build",
+    "build": "astro build && npm run generateSW",
+    "generateSW": "SW_DIST_PATH=dist/ workbox generateSW workbox.config.cjs",
     "preview": "astro preview"
   },
   "devDependencies": {
@@ -23,6 +23,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sharp": "^0.32.4",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.3.3",
+    "workbox-cli": "^7.0.0"
   }
 }
