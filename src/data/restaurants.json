@@ -30,10 +30,16 @@
     "onlineOrderUrl": "https://www.alssteakhouseva.com/order"
   },
   {
-    "name": "Sicilian Pizza",
-    "slug": "sicilian-pizza",
-    "website": "https://www.alexandriasicilianpizza.com/menu.aspx",
-    "onlineOrderUrl": "https://www.beyondmenu.com/21396/alexandria/sicilian-pizza-alexandria-22301.aspx?utm_source=satellite&utm_medium=top_banner&pk_vid=8f7b184cc016007c164169359386664f"
+    "name": "Benny Diforza's",
+    "slug": "benny-diforzas",
+    "website": "https://www.bennysva.com/locations/diforzas/",
+    "onlineOrderUrl": "https://order.spoton.com/bennys-105/alexandria-va/65a07d0c66be7cc0fd08c9bd"
+  },
+  {
+    "name": "French Toast DMV",
+    "slug": "french-toast-dmv",
+    "website": "https://www.frenchtoastdmv.com/",
+    "onlineOrderUrl": "https://www.frenchtoastdmv.com/"
   },
   {
     "name": "Junction Bakery & Bistro",
@@ -48,10 +54,16 @@
     "onlineOrderUrl": "https://gotab.io/loc/thegardendelray/spot/takeout/order"
   },
   {
-    "name": "Kaizen",
-    "slug": "kaizen",
-    "website": "https://www.kaizen-tavern.com/menu.html",
-    "onlineOrderUrl": "https://onlineordering.rmpos.com/Order/(S(fpwzgt1dlcbe3xcau4rwi12v))/?wci=h5cFapXS"
+    "name": "Rosemarino D'Italia",
+    "slug": "rosemarino-ditalia",
+    "website": "https://rosemarinoditalia.com/alexandria-va-del-ray",
+    "onlineOrderUrl": "https://order.toasttab.com/online/rosemarino-d-italia-va-1905-mount-vernon-avenue"
+  },
+  {
+    "name": "Zuki Moon",
+    "slug": "zuki-moon",
+    "website": "https://www.zukimoon.com/",
+    "onlineOrderUrl": "https://order.toasttab.com/online/zuki-moon"
   },
   {
     "name": "Del Ray Café",
