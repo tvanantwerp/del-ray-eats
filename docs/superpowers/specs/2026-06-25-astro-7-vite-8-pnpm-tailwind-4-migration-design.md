@@ -127,3 +127,23 @@ removed in Astro 3+. Replace with Astro's built-in `astro:assets`:
   and v4) could shift appearance subtly; caught by the side-by-side check.
 - **Workbox** precache glob is unchanged and should keep working; verify the SW
   file is emitted and registered.
+
+## Implementation Notes (post-execution)
+
+These record where execution diverged from or extended the plan above:
+
+- **`.npmrc` superseded by `pnpm-workspace.yaml`.** The plan said to keep
+  `.npmrc` (which held `shamefully-hoist = true`) as-is. pnpm 11 no longer reads
+  `shamefully-hoist` from `.npmrc`, so it was inert. The active configuration now
+  lives in `pnpm-workspace.yaml`: `shamefullyHoist: true` (required so Astro's
+  bundled `import("sharp")` resolves at build) plus `allowBuilds: { esbuild,
+  sharp }` to satisfy pnpm 11's native-build-script approval gate. `.npmrc` was
+  deleted since its only line was dead.
+- **`@astrojs/check` + `typescript`** were added as devDependencies to run
+  `pnpm exec astro check` during verification.
+- **`.gitignore`** gained `.astro/` (Astro 7's generated type-cache directory).
+- **Known follow-ups (not blocking, out of this migration's scope):** README's
+  "Project Structure" section still contains generic Astro-starter prose naming
+  React/Vue/Svelte; and Workbox warns that 4 oversized PNGs (stomping-ground,
+  sicilian-pizza, rubias-tacos, kaizen) exceed the precache size limit and are
+  not precached.
