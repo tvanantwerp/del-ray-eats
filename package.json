@@ -1,29 +1,26 @@
 {
-  "name": "@example/minimal",
+  "name": "del-ray-eats",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && npm run generateSW",
+    "build": "astro build && pnpm generateSW",
     "generateSW": "SW_DIST_PATH=dist/ workbox generateSW workbox.config.cjs",
     "preview": "astro preview"
   },
   "devDependencies": {
-    "@astrojs/image": "^0.17.2",
-    "@astrojs/react": "^2.2.1",
-    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
-    "@types/react": "^18.2.16",
-    "astro": "^2.9.2",
-    "autoprefixer": "^10.4.14",
-    "cssnano": "^6.0.1",
-    "fs-extra": "^11.1.1",
-    "prettier": "^3.0.0",
-    "prettier-plugin-astro": "^0.11.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sharp": "^0.32.4",
-    "tailwindcss": "^3.3.3",
-    "workbox-cli": "^7.0.0"
+    "@astrojs/check": "^0.9.9",
+    "@tailwindcss/vite": "^4.3.1",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "astro": "^7.0.2",
+    "prettier": "^3.8.4",
+    "prettier-plugin-astro": "^0.14.1",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3",
+    "workbox-cli": "^7.4.1"
   }
 }

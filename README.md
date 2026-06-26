@@ -1,12 +1,6 @@
-# Astro Starter Kit: Minimal
+# Del Ray Eats
 
-```
-npm init astro -- --template minimal
-```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+A static directory of restaurants in the Del Ray neighborhood of Alexandria, VA, linking each to its website and online-ordering page. Built with Astro and Tailwind, served as a PWA.
 
 ## 🚀 Project Structure
 
@@ -33,10 +27,10 @@ All commands are run from the root of the project, from a terminal:
 
 | Command           | Action                                       |
 |:----------------  |:-------------------------------------------- |
-| `npm install`     | Installs dependencies                        |
-| `npm run dev`     | Starts local dev server at `localhost:3000`  |
-| `npm run build`   | Build your production site to `./dist/`      |
-| `npm run preview` | Preview your build locally, before deploying |
+| `pnpm install`    | Installs dependencies                        |
+| `pnpm dev`        | Starts local dev server at `localhost:3000`  |
+| `pnpm build`      | Build the production site to `./dist/`       |
+| `pnpm preview`    | Preview the build locally, before deploying  |
 
 ## 👀 Want to learn more?
 

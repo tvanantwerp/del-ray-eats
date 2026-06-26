@@ -1,9 +1,24 @@
 ---
-import { Picture } from '@astrojs/image/components';
+import { Picture } from 'astro:assets';
 
 import Button from './button.astro';
 
 const { restaurant } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/images/*.png',
+);
+const imageKey = `../assets/images/${restaurant.slug}.png`;
+const imageLoader = images[imageKey];
+
+if (!imageLoader) {
+  throw new Error(
+    `No image for restaurant "${restaurant.name}" (expected ${imageKey}). ` +
+      `Add src/assets/images/${restaurant.slug}.png.`,
+  );
+}
+
+const { default: image } = await imageLoader();
 ---
 
 <article
@@ -11,15 +26,13 @@ const { restaurant } = Astro.props;
   style="grid-template-rows: auto 1fr;"
 >
   <Picture
-    src={import(`../assets/images/${restaurant.slug}.png`)}
+    src={image}
     alt={`Exterior of ${restaurant.name}`}
+    widths={[400, 800]}
     sizes="400px"
-    widths={[400]}
-    aspectRatio={4/3}
-    formats={['avif', 'webp', 'jpeg']}
-    fit="cover"
-    position="center"
-    class="rounded-t-lg"
+    formats={['avif', 'webp']}
+    fallbackFormat="jpeg"
+    class="w-full aspect-[4/3] object-cover rounded-t-lg"
   />
   <div class="grid items-end rounded-b-lg bg-white dark:bg-slate-800 -mt-8">
     <h1
