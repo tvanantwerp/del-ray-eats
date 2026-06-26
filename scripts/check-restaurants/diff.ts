@@ -6,16 +6,7 @@ import type {
 
 const NAME_MATCH_THRESHOLD = 0.6;
 
-const STOPWORDS = new Set([
-  'the',
-  'restaurant',
-  'cafe',
-  'and',
-  'of',
-  'del',
-  'ray',
-  'va',
-]);
+const STOPWORDS = new Set(['the', 'and', 'of']);
 
 export function slugify(name: string): string {
   return name
@@ -48,7 +39,7 @@ function tokens(name: string): Set<string> {
 export function nameSimilarity(a: string, b: string): number {
   const ta = tokens(a);
   const tb = tokens(b);
-  if (ta.size === 0 && tb.size === 0) return 1;
+  if (ta.size === 0 && tb.size === 0) return 0;
   if (ta.size === 0 || tb.size === 0) return 0;
   let intersection = 0;
   for (const t of ta) if (tb.has(t)) intersection += 1;

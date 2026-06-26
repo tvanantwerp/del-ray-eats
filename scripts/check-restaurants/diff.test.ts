@@ -47,6 +47,16 @@ describe('nameSimilarity', () => {
   test('unrelated names score below threshold', () => {
     expect(nameSimilarity('Thai Peppers', 'Pork Barrel BBQ')).toBeLessThan(0.6);
   });
+
+  test('names that reduce to empty token sets score 0, not a perfect match', () => {
+    expect(nameSimilarity('the and of', 'the of and')).toBe(0);
+  });
+
+  test('names sharing only a generic stopword score below threshold', () => {
+    expect(
+      nameSimilarity('Del Ray Pizzeria', 'Holy Cow'),
+    ).toBeLessThan(0.6);
+  });
 });
 
 describe('diffRestaurants', () => {
