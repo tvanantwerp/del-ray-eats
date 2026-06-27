@@ -53,9 +53,7 @@ describe('nameSimilarity', () => {
   });
 
   test('names sharing only a generic stopword score below threshold', () => {
-    expect(
-      nameSimilarity('Del Ray Pizzeria', 'Holy Cow'),
-    ).toBeLessThan(0.6);
+    expect(nameSimilarity('Del Ray Pizzeria', 'Holy Cow')).toBeLessThan(0.6);
   });
 });
 
@@ -85,11 +83,15 @@ describe('diffRestaurants', () => {
   });
 
   test('backfills placeId for an existing entry with no placeId via name match', () => {
-    const existing = [restaurant({ name: 'Thai Peppers', slug: 'thai-peppers' })];
+    const existing = [
+      restaurant({ name: 'Thai Peppers', slug: 'thai-peppers' }),
+    ];
     const discovered = [place({ placeId: 'p-thai', name: 'Thai Peppers' })];
     const statuses = new Map<string, BusinessStatus | 'NOT_FOUND'>();
     const result = diffRestaurants(existing, discovered, statuses);
-    expect(result.backfills).toEqual([{ slug: 'thai-peppers', placeId: 'p-thai' }]);
+    expect(result.backfills).toEqual([
+      { slug: 'thai-peppers', placeId: 'p-thai' },
+    ]);
     // matched by name, so NOT an addition
     expect(result.additions).toEqual([]);
   });

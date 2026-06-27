@@ -1,8 +1,4 @@
-import type {
-  BusinessStatus,
-  DiscoveredPlace,
-  Restaurant,
-} from './types';
+import type { BusinessStatus, DiscoveredPlace, Restaurant } from './types';
 
 const NAME_MATCH_THRESHOLD = 0.6;
 
