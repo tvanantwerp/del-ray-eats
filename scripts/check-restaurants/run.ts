@@ -23,6 +23,9 @@ export interface Effects {
   deleteImages(paths: string[]): Promise<void>;
   reportIssue(body: string): Promise<void>;
   openClosurePr(removed: Restaurant[]): Promise<void>;
+  openBackfillPr(
+    backfills: Array<{ slug: string; placeId: string }>,
+  ): Promise<void>;
   log(msg: string): void;
 }
 
@@ -84,6 +87,8 @@ export async function run(
   if (diff.closures.length > 0) {
     await effects.deleteImages(imageFilesToDelete(diff.closures));
     await effects.openClosurePr(diff.closures);
+  } else if (diff.backfills.length > 0) {
+    await effects.openBackfillPr(diff.backfills);
   }
 
   await effects.reportIssue(buildIssueBody(diff.additions, diff.warnings));

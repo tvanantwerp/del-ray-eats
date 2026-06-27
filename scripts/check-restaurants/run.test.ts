@@ -21,16 +21,19 @@ function fakeEffects(existing: Restaurant[]): Effects & {
   deleted: string[];
   issues: string[];
   prs: Restaurant[][];
+  backfillPrs: Array<Array<{ slug: string; placeId: string }>>;
 } {
   const written: string[] = [];
   const deleted: string[] = [];
   const issues: string[] = [];
   const prs: Restaurant[][] = [];
+  const backfillPrs: Array<Array<{ slug: string; placeId: string }>> = [];
   return {
     written,
     deleted,
     issues,
     prs,
+    backfillPrs,
     readRestaurants: async () => existing,
     writeRestaurants: async json => {
       written.push(json);
@@ -43,6 +46,9 @@ function fakeEffects(existing: Restaurant[]): Effects & {
     },
     openClosurePr: async removed => {
       prs.push(removed);
+    },
+    openBackfillPr: async backfills => {
+      backfillPrs.push(backfills);
     },
     log: () => {},
   };
@@ -132,6 +138,72 @@ describe('run', () => {
     const client = fakeClient(padPlaces(12), {});
     const effects = fakeEffects([]);
     await run(client, effects);
+    expect(effects.issues).toHaveLength(1);
+  });
+
+  test('backfills only: opens a backfill PR and writes restaurants, but does not open a closure PR', async () => {
+    const existing: Restaurant[] = [
+      {
+        name: 'Found Me',
+        slug: 'found-me',
+        website: '',
+        onlineOrderUrl: '',
+      },
+    ];
+    const discovered = [
+      place({ placeId: 'p-found', name: 'Found Me' }),
+      ...padPlaces(12),
+    ];
+    const client = fakeClient(discovered, {});
+    const effects = fakeEffects(existing);
+    const result = await run(client, effects);
+
+    expect(result.aborted).toBe(false);
+    expect(result.closures).toBe(0);
+    expect(result.backfills).toBe(1);
+    expect(effects.backfillPrs).toHaveLength(1);
+    expect(effects.backfillPrs[0]).toEqual([
+      { slug: 'found-me', placeId: 'p-found' },
+    ]);
+    expect(effects.prs).toHaveLength(0);
+    expect(effects.written).toHaveLength(1);
+    expect(effects.written[0]).toContain('p-found');
+    expect(effects.issues).toHaveLength(1);
+  });
+
+  test('closures and backfills together: opens a closure PR (not a backfill PR), and writes restaurants once', async () => {
+    const existing: Restaurant[] = [
+      {
+        name: 'Gone',
+        slug: 'gone',
+        website: '',
+        onlineOrderUrl: '',
+        placeId: 'p-gone',
+      },
+      {
+        name: 'Found Me',
+        slug: 'found-me',
+        website: '',
+        onlineOrderUrl: '',
+      },
+    ];
+    const discovered = [
+      place({ placeId: 'p-found', name: 'Found Me' }),
+      ...padPlaces(12),
+    ];
+    const client = fakeClient(discovered, {
+      'p-gone': 'CLOSED_PERMANENTLY',
+    });
+    const effects = fakeEffects(existing);
+    const result = await run(client, effects);
+
+    expect(result.aborted).toBe(false);
+    expect(result.closures).toBe(1);
+    expect(result.backfills).toBe(1);
+    expect(effects.prs).toHaveLength(1);
+    expect(effects.prs[0]?.map(r => r.slug)).toEqual(['gone']);
+    expect(effects.backfillPrs).toHaveLength(0);
+    expect(effects.written).toHaveLength(1);
     expect(effects.issues).toHaveLength(1);
   });
 });
