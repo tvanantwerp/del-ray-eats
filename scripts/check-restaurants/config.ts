@@ -1,10 +1,12 @@
 import type { LatLng } from './types';
 
-// Mount Vernon Ave ∩ E Braddock Rd (south end of the strip). Verify in Maps.
-export const SEGMENT_START: LatLng = { lat: 38.8204, lng: -77.061 };
+// Mount Vernon Ave ∩ E Braddock Rd (south end of the strip).
+// Geocoded via Places Text Search (2026-06-29).
+export const SEGMENT_START: LatLng = { lat: 38.8136897, lng: -77.0563598 };
 
-// Mount Vernon Ave ∩ Commonwealth Ave (north end of the strip). Verify in Maps.
-export const SEGMENT_END: LatLng = { lat: 38.8348, lng: -77.0672 };
+// Mount Vernon Ave ∩ Commonwealth Ave (north end of the strip).
+// Geocoded via Places Text Search (2026-06-29).
+export const SEGMENT_END: LatLng = { lat: 38.8311216, lng: -77.0595599 };
 
 // Nearby Search (New) caps each request at 20 results with no pagination, so
 // we tile a series of small overlapping circles along the corridor and union

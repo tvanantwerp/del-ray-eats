@@ -1,10 +1,19 @@
 import { describe, expect, test } from 'vitest';
 
+import { SEGMENT_END, SEGMENT_START } from './config';
 import type { PlacesClient } from './places-client';
 import { type Effects, run } from './run';
 import type { BusinessStatus, DiscoveredPlace, Restaurant } from './types';
 
-const onAvenue = { lat: 38.8276, lng: -77.0641 };
+// A point on the corridor: the midpoint of the avenue segment, derived from
+// config so these fixtures stay valid if the endpoints are recalibrated.
+const onAvenue = {
+  lat: (SEGMENT_START.lat + SEGMENT_END.lat) / 2,
+  lng: (SEGMENT_START.lng + SEGMENT_END.lng) / 2,
+};
+
+// A point well outside the ~150 m corridor (~0.01° lng ≈ 850 m east).
+const offCorridor = { lat: onAvenue.lat, lng: onAvenue.lng + 0.01 };
 
 function fakeClient(
   discovered: DiscoveredPlace[],
@@ -123,7 +132,7 @@ describe('run', () => {
     const farEast = place({
       placeId: 'p-far',
       name: 'Far Away Diner',
-      location: { lat: 38.8276, lng: -77.0641 + 0.01 },
+      location: offCorridor,
     });
     const client = fakeClient([...padPlaces(12), farEast], {});
     const effects = fakeEffects([]);
