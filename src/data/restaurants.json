@@ -197,5 +197,75 @@
     "website": "https://www.straccipizza.com/",
     "onlineOrderUrl": "https://www.toasttab.com/straccipizza/v3",
     "placeId": "ChIJd_ZYiMOxt4kRr4jdltEL3_s"
+  },
+  {
+    "name": "Little Birdie VA",
+    "slug": "little-birdie-va",
+    "website": "https://www.littlebirdieva.com/",
+    "onlineOrderUrl": "https://www.littlebirdieva.com/",
+    "placeId": "ChIJiwDa0SGxt4kR9qN_WGnwkyo"
+  },
+  {
+    "name": "Pak Soii Izakaya & Bar",
+    "slug": "pak-soii-izakaya-bar",
+    "website": "http://www.paksoiiizakaya.com/",
+    "onlineOrderUrl": "http://www.paksoiiizakaya.com/",
+    "placeId": "ChIJeb5j0F6xt4kR3NecEwi_-kM"
+  },
+  {
+    "name": "Mulberry Lane",
+    "slug": "mulberry-lane",
+    "website": "https://www.mulberrylanedmv.com/",
+    "onlineOrderUrl": "https://www.mulberrylanedmv.com/",
+    "placeId": "ChIJp0IFV1ext4kRZ-cN5QvkkHA"
+  },
+  {
+    "name": "Shorty’s Deluxe",
+    "slug": "shortys-deluxe",
+    "website": "https://www.shortysdeluxe.com/",
+    "onlineOrderUrl": "https://www.shortysdeluxe.com/",
+    "placeId": "ChIJDU2ZCgCxt4kR7V05XyKBF2E"
+  },
+  {
+    "name": "Just Fine Donuts",
+    "slug": "just-fine-donuts",
+    "website": "https://www.justfinedonut.com/",
+    "onlineOrderUrl": "https://www.justfinedonut.com/",
+    "placeId": "ChIJte-O1vuxt4kR45vKmWxjAt8"
+  },
+  {
+    "name": "The Dairy Godmother",
+    "slug": "the-dairy-godmother",
+    "website": "http://www.thedairygodmother.com/",
+    "onlineOrderUrl": "http://www.thedairygodmother.com/",
+    "placeId": "ChIJ2zVSKCCxt4kRnhSJrasXEew"
+  },
+  {
+    "name": "Del Ray Pop Up Bar",
+    "slug": "del-ray-pop-up-bar",
+    "website": "https://www.delrayspopupbar.com/",
+    "onlineOrderUrl": "https://www.delrayspopupbar.com/",
+    "placeId": "ChIJZZ64Gb2xt4kRb8rAaxPZqlc"
+  },
+  {
+    "name": "Taqueria Poblano",
+    "slug": "taqueria-poblano",
+    "website": "https://www.taqueriapoblano.com/",
+    "onlineOrderUrl": "https://www.taqueriapoblano.com/",
+    "placeId": "ChIJI6pQLCCxt4kRLe49C7qXRQE"
+  },
+  {
+    "name": "Del Ray Public House",
+    "slug": "del-ray-public-house",
+    "website": "https://www.delraypublichouse.com/",
+    "onlineOrderUrl": "https://www.delraypublichouse.com/",
+    "placeId": "ChIJKVc0P4uxt4kRemccNDt9dKo"
+  },
+  {
+    "name": "Gustave Le Jardin",
+    "slug": "gustave-le-jardin",
+    "website": "https://gustaveboulangerie.com/",
+    "onlineOrderUrl": "https://gustaveboulangerie.com/",
+    "placeId": "ChIJf0KwLQCxt4kRZU45T9PdiQQ"
   }
 ]
