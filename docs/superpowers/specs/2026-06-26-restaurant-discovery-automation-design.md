@@ -32,16 +32,26 @@ query volume (well within the monthly free credit).
 
 ## Architecture
 
-A single Node script (matches the existing pnpm/Node toolchain), executed by a
-**scheduled GitHub Action** (weekly cron + manual `workflow_dispatch`). The API key
-is stored in the repo secret `GOOGLE_PLACES_API_KEY`.
+Two Node entrypoints over a shared core (pnpm/Node toolchain), executed by a
+**scheduled GitHub Action** (weekly cron + manual `workflow_dispatch`) as two
+sequential steps. The detection phase needs `GOOGLE_PLACES_API_KEY`; the action
+phase needs `GH_TOKEN`.
 
-Each run:
+**Why two phases:** detection is read-only and safe to run anytime (locally, to
+eyeball for errors); the irreversible GitHub actions (commits, PRs, Issue) are
+isolated in a separate executor that only acts on a report. The two communicate
+through a JSON report file (`restaurant-check-report.json`, gitignored).
 
-1. **Fetch** current restaurants on the strip via Places **Nearby Search (New)**.
-2. **Load** `src/data/restaurants.json`.
-3. **Diff** the two sets by stable identity (`placeId`).
-4. **Act** — open a PR for confirmed closures; open/update an Issue for new candidates.
+**Phase 1 — `check` (read-only detection).** Fetch current restaurants on the
+strip (tiled Places **Nearby Search (New)**), load `src/data/restaurants.json`,
+diff by stable identity (`placeId`), apply the safety guard. Writes a
+`CheckReport` JSON and prints a human-readable summary. Performs **no** writes,
+deletions, or `gh` calls.
+
+**Phase 2 — `apply` (act on a report).** Reads the `CheckReport` and performs the
+side effects: open a PR for confirmed closures, a PR for backfills, and open/update
+an Issue for new candidates + entries needing manual review. No Google API calls.
+No-ops if the report is `aborted`.
 
 The script is structured into three parts to isolate I/O from logic:
 
