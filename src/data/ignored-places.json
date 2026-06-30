@@ -1,0 +1,37 @@
+[
+  {
+    "placeId": "ChIJLU9Yoh-xt4kRG2tbSActftg",
+    "name": "7-Eleven",
+    "reason": "convenience store, not a restaurant"
+  },
+  {
+    "placeId": "ChIJHzeoUh6xt4kRFlbivsqSUY8",
+    "name": "Majestic Lounge",
+    "reason": "bar inside Evening Star"
+  },
+  {
+    "placeId": "ChIJKyknsx-xt4kRZM8qXq8X4Xk",
+    "name": "No. 9 Lounge",
+    "reason": "bar inside Evening Star"
+  },
+  {
+    "placeId": "ChIJfUSzgsSxt4kRm6M1A1CpOag",
+    "name": "Havana 151 - The Loft at Lena's",
+    "reason": "event/loft space above Lena's"
+  },
+  {
+    "placeId": "ChIJdT2PNcaxt4kRa5iz_1Ta3pU",
+    "name": "Pattana Restaurant Group",
+    "reason": "management/umbrella entity, not a venue"
+  },
+  {
+    "placeId": "ChIJHxdFbx6xt4kR10P_YIYGJew",
+    "name": "Territory Foods",
+    "reason": "meal-prep/delivery, not a sit-down restaurant"
+  },
+  {
+    "placeId": "ChIJZ9ekjXCxt4kRcswQFrKnQOs",
+    "name": "Uncle Kebba's Lemonade",
+    "reason": "beverage vendor, not a restaurant"
+  }
+]

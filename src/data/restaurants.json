@@ -3,174 +3,376 @@
     "name": "Lena's Wood-Fired Pizza & Tap",
     "slug": "lenas",
     "website": "https://www.lenaswoodfire.com/menus",
-    "onlineOrderUrl": "https://direct.chownow.com/order/11242/locations/15538"
+    "onlineOrderUrl": "https://direct.chownow.com/order/11242/locations/15538",
+    "placeId": "ChIJcV4Bgv2wt4kRvkSvWD95nFE",
+    "location": {
+      "lat": 38.8134185,
+      "lng": -77.0560692
+    }
   },
   {
     "name": "South China Restaurant",
     "slug": "south-china",
     "website": "https://www.southchinaalexandria.com/menu.aspx",
-    "onlineOrderUrl": "https://www.beyondmenu.com/20177/alexandria/south-china-restaurant-alexandria-22301.aspx?utm_source=satellite&utm_medium=home_order&pk_vid=91725f268b627168164166810786664f"
+    "onlineOrderUrl": "https://www.beyondmenu.com/20177/alexandria/south-china-restaurant-alexandria-22301.aspx?utm_source=satellite&utm_medium=home_order&pk_vid=91725f268b627168164166810786664f",
+    "placeId": "ChIJx35hj0Oxt4kRCXlRPCs3wdU",
+    "location": {
+      "lat": 38.818033899999996,
+      "lng": -77.0574583
+    }
   },
   {
     "name": "Bella Napoli Restaurant",
     "slug": "bella-napoli",
     "website": "https://slicelife.com/restaurants/va/alexandria/22301/bella-napoli-italian-restaurant/menu?utm_campaign=direct_websites&ajs_aid=&client_id=",
-    "onlineOrderUrl": "https://slicelife.com/restaurants/va/alexandria/22301/bella-napoli-italian-restaurant/menu?utm_campaign=direct_websites"
+    "onlineOrderUrl": "https://slicelife.com/restaurants/va/alexandria/22301/bella-napoli-italian-restaurant/menu?utm_campaign=direct_websites",
+    "placeId": "ChIJrbuQcR2xt4kRzJZCKgw5DIs",
+    "location": {
+      "lat": 38.818211999999995,
+      "lng": -77.057462
+    }
   },
   {
     "name": "Matt & Tony's All Day Kitchen + Bar",
     "slug": "matt-and-tonys",
     "website": "https://mattandtonysva.com/food-drink/",
-    "onlineOrderUrl": "https://www.toasttab.com/matt-tonys-1501-mt-vernon-ave/v3"
+    "onlineOrderUrl": "https://www.toasttab.com/matt-tonys-1501-mt-vernon-ave/v3",
+    "placeId": "ChIJE0Oue1yxt4kRFnJHaywMeo4",
+    "location": {
+      "lat": 38.8198119,
+      "lng": -77.0571884
+    }
   },
   {
     "name": "Al's Steak House",
     "slug": "als-steak-house",
     "website": "https://www.alssteakhouseva.com/",
-    "onlineOrderUrl": "https://www.alssteakhouseva.com/order"
-  },
-  {
-    "name": "Benny Diforza's",
-    "slug": "benny-diforzas",
-    "website": "https://www.bennysva.com/locations/diforzas/",
-    "onlineOrderUrl": "https://order.spoton.com/bennys-105/alexandria-va/65a07d0c66be7cc0fd08c9bd"
-  },
-  {
-    "name": "French Toast DMV",
-    "slug": "french-toast-dmv",
-    "website": "https://www.frenchtoastdmv.com/",
-    "onlineOrderUrl": "https://www.frenchtoastdmv.com/"
+    "onlineOrderUrl": "https://www.alssteakhouseva.com/order",
+    "placeId": "ChIJQxvW6h2xt4kRQARpQalBeHQ",
+    "location": {
+      "lat": 38.8199642,
+      "lng": -77.0577393
+    }
   },
   {
     "name": "Junction Bakery & Bistro",
     "slug": "junction",
     "website": "https://www.junctionbakery.com/menus/alexandria/",
-    "onlineOrderUrl": "https://www.toasttab.com/junction-bakery-bistro-alexandria-1508-mt-vernon-ave-1718/v3/?mode=fulfillment"
+    "onlineOrderUrl": "https://www.toasttab.com/junction-bakery-bistro-alexandria-1508-mt-vernon-ave-1718/v3/?mode=fulfillment",
+    "placeId": "ChIJ8T926h2xt4kRJ3nIMdGovOE",
+    "location": {
+      "lat": 38.8202862,
+      "lng": -77.05788000000001
+    }
   },
   {
     "name": "The Garden",
     "slug": "the-garden",
     "website": "https://www.thegardendelray.com/food",
-    "onlineOrderUrl": "https://gotab.io/loc/thegardendelray/spot/takeout/order"
+    "onlineOrderUrl": "https://gotab.io/loc/thegardendelray/spot/takeout/order",
+    "placeId": "ChIJ0TRfyU-xt4kRNZBpqm351sM",
+    "location": {
+      "lat": 38.820014900000004,
+      "lng": -77.0573043
+    }
   },
   {
     "name": "Rosemarino D'Italia",
     "slug": "rosemarino-ditalia",
     "website": "https://rosemarinoditalia.com/alexandria-va-del-ray",
-    "onlineOrderUrl": "https://order.toasttab.com/online/rosemarino-d-italia-va-1905-mount-vernon-avenue"
-  },
-  {
-    "name": "Zuki Moon",
-    "slug": "zuki-moon",
-    "website": "https://www.zukimoon.com/",
-    "onlineOrderUrl": "https://order.toasttab.com/online/zuki-moon"
+    "onlineOrderUrl": "https://order.toasttab.com/online/rosemarino-d-italia-va-1905-mount-vernon-avenue",
+    "placeId": "ChIJ2WyuSR6xt4kRWD2UZOTLXzc",
+    "location": {
+      "lat": 38.823456199999995,
+      "lng": -77.0579291
+    }
   },
   {
     "name": "Del Ray Café",
     "slug": "del-ray-cafe",
     "website": "https://www.delraycafe.com/our-menus/",
-    "onlineOrderUrl": "https://www.delraycafe.com/order-online/"
+    "onlineOrderUrl": "https://www.delraycafe.com/order-online/",
+    "placeId": "ChIJS1TgNB6xt4kRBA6GYja2FyY",
+    "location": {
+      "lat": 38.8238108,
+      "lng": -77.0576903
+    }
   },
   {
-    "name": "Evening Star / Front Porch",
+    "name": "Evening Star",
     "slug": "evening-star",
     "website": "https://www.eveningstarcafe.net/",
-    "onlineOrderUrl": "https://app.frontporch.menu/"
+    "onlineOrderUrl": "https://www.eveningstarcafe.net/",
+    "placeId": "ChIJQTUpsx-xt4kRhuKYyACNrgI",
+    "location": {
+      "lat": 38.8240621,
+      "lng": -77.05855869999999
+    }
   },
   {
     "name": "Hi/Fi Tex-Mex BBQ",
     "slug": "hifi-tex-mex-bbq",
     "website": "https://www.hifitexmexbbq.com/",
-    "onlineOrderUrl": "https://order.online/store/hi-fi-tex-mex-bbq-alexandria-26142967/?hideModal=true&pickup=true"
-  },
-  {
-    "name": "Thai Peppers",
-    "slug": "thai-peppers",
-    "website": "https://www.thaipeppersalexandria.com/menu",
-    "onlineOrderUrl": "https://www.thaipeppersalexandria.com/takeout-food-delivery"
-  },
-  {
-    "name": "Del Ray Pizzeria",
-    "slug": "del-ray-pizzeria",
-    "website": "http://www.delraypizzeria.com/#menus",
-    "onlineOrderUrl": "https://www.toasttab.com/del-ray-pizzeria/v3/?mode=fulfillment"
+    "onlineOrderUrl": "https://order.online/store/hi-fi-tex-mex-bbq-alexandria-26142967/?hideModal=true&pickup=true",
+    "placeId": "ChIJ28xEvcCxt4kR-EdZt782Dhw",
+    "location": {
+      "lat": 38.8239957,
+      "lng": -77.0584135
+    }
   },
   {
     "name": "Gustave Boulangerie",
     "slug": "gustave-boulangerie",
     "website": "https://gustaveboulangerie.com/",
-    "onlineOrderUrl": "https://gustaveboulangerie.com/"
+    "onlineOrderUrl": "https://gustaveboulangerie.com/",
+    "placeId": "ChIJ_Yvbazext4kRUooIHHWoBZU",
+    "aliasPlaceIds": ["ChIJf0KwLQCxt4kRZU45T9PdiQQ"],
+    "location": {
+      "lat": 38.8260637,
+      "lng": -77.0584776
+    }
   },
   {
     "name": "Market 2 Market ",
     "slug": "market-2-market",
     "website": "https://www.m2mdelray.com/the-food",
-    "onlineOrderUrl": "https://www.toasttab.com/st-elmos-coffee-pub-market/v3/?mode=fulfillment"
+    "onlineOrderUrl": "https://www.toasttab.com/st-elmos-coffee-pub-market/v3/?mode=fulfillment",
+    "placeId": "ChIJz0aPgx-xt4kRhGOxzMvDAB8",
+    "location": {
+      "lat": 38.8261833,
+      "lng": -77.0590083
+    }
   },
   {
     "name": "St. Elmo's Coffee Pub",
     "slug": "st-elmos",
     "website": "https://www.stelmoscoffeepub.com/",
-    "onlineOrderUrl": "https://www.toasttab.com/st-elmos-coffee-pub-market/v3/?mode=fulfillment"
+    "onlineOrderUrl": "https://www.toasttab.com/st-elmos-coffee-pub-market/v3/?mode=fulfillment",
+    "placeId": "ChIJ1fnUhR-xt4kRNZGNnsHi1Io",
+    "location": {
+      "lat": 38.826255599999996,
+      "lng": -77.0588806
+    }
   },
   {
     "name": "Bagel Uprising",
     "slug": "bagel-uprising",
     "website": "http://bageluprising.com/",
-    "onlineOrderUrl": "https://bagel-uprising.square.site/"
+    "onlineOrderUrl": "https://bagel-uprising.square.site/",
+    "placeId": "ChIJSR33AOqxt4kRR_6qHR3ApPE",
+    "location": {
+      "lat": 38.82651010000001,
+      "lng": -77.0583085
+    }
   },
   {
     "name": "LA'BAIK",
     "slug": "labaik",
     "website": "https://tastelabaik.com/",
-    "onlineOrderUrl": "https://order.toasttab.com/online/la-baik-2309-mount-vernon-avenue"
+    "onlineOrderUrl": "https://order.toasttab.com/online/la-baik-2309-mount-vernon-avenue",
+    "placeId": "ChIJ-foEUEWxt4kR6wbQZG_Fflk",
+    "location": {
+      "lat": 38.8265883,
+      "lng": -77.0584926
+    }
   },
   {
     "name": "Holy Cow",
     "slug": "holy-cow",
     "website": "https://holycowdelray.com/",
-    "onlineOrderUrl": "https://www.toasttab.com/holy-cow-del-ray/v3/?mode=fulfillment"
+    "onlineOrderUrl": "https://www.toasttab.com/holy-cow-del-ray/v3/?mode=fulfillment",
+    "placeId": "ChIJTayngB-xt4kR2pqzUpeWKxc",
+    "location": {
+      "lat": 38.826530399999996,
+      "lng": -77.0588989
+    }
   },
   {
     "name": "Pork Barrel BBQ",
     "slug": "pork-barrel-bbq",
     "website": "https://bbqdelray.com/",
-    "onlineOrderUrl": "https://www.toasttab.com/pork-barrel-bbq/v3/?mode=fulfillment"
+    "onlineOrderUrl": "https://www.toasttab.com/pork-barrel-bbq/v3/?mode=fulfillment",
+    "placeId": "ChIJTayngB-xt4kRF4GdccHsLKI",
+    "location": {
+      "lat": 38.826760799999995,
+      "lng": -77.05896609999999
+    }
   },
   {
     "name": "Cheesetique Del Ray",
     "slug": "cheesetique",
     "website": "https://www.cheesetique.com/menus/",
-    "onlineOrderUrl": "https://cheesetique.square.site/s/order/11"
+    "onlineOrderUrl": "https://cheesetique.square.site/s/order/11",
+    "placeId": "ChIJzeU5MCCxt4kRkdoaIANtCbM",
+    "location": {
+      "lat": 38.8273557,
+      "lng": -77.05867669999999
+    }
   },
   {
     "name": "Piece Out Del Ray",
     "slug": "piece-out",
     "website": "https://www.pieceoutdelray.com/menu",
-    "onlineOrderUrl": "https://www.toasttab.com/pieceout/v3/?mode=fulfillment"
+    "onlineOrderUrl": "https://www.toasttab.com/pieceout/v3/?mode=fulfillment",
+    "placeId": "ChIJr8dIzkqxt4kRMmJgEmym0vg",
+    "location": {
+      "lat": 38.8275143,
+      "lng": -77.0586622
+    }
   },
   {
     "name": "Tsim Yung Chinese",
     "slug": "tsim-yung-chinese",
     "website": "https://www.tsimyungva.com/",
-    "onlineOrderUrl": "https://www.tsimyungva.com/menu"
+    "onlineOrderUrl": "https://www.tsimyungva.com/menu",
+    "placeId": "ChIJ_6YCFb-xt4kRMYBt_sf2iEs",
+    "location": {
+      "lat": 38.828617799999996,
+      "lng": -77.05885959999999
+    }
   },
   {
     "name": "Spice Kraft",
     "slug": "spice-kraft",
     "website": "https://www.spicekraftva.com/menu-alexandria-arlington",
-    "onlineOrderUrl": "https://jmj-hospitality-llc.square.site/"
+    "onlineOrderUrl": "https://jmj-hospitality-llc.square.site/",
+    "placeId": "ChIJdVHRI8Cxt4kRxXS4BcutwVc",
+    "location": {
+      "lat": 38.82873,
+      "lng": -77.058808
+    }
   },
   {
     "name": "Los Tios Grill",
     "slug": "los-tios-grill",
     "website": "https://lostiosgrill.com/del-ray/",
-    "onlineOrderUrl": "https://www.clover.com/online-ordering/los-tios-grill-restauran-alexandria"
+    "onlineOrderUrl": "https://www.clover.com/online-ordering/los-tios-grill-restauran-alexandria",
+    "placeId": "ChIJQ8_MVSCxt4kRXPkH8FZ2co0",
+    "location": {
+      "lat": 38.829124799999995,
+      "lng": -77.05889739999999
+    }
   },
   {
     "name": "Stracci Pizza",
     "slug": "stracci-pizza",
     "website": "https://www.straccipizza.com/",
-    "onlineOrderUrl": "https://www.toasttab.com/straccipizza/v3"
+    "onlineOrderUrl": "https://www.toasttab.com/straccipizza/v3",
+    "placeId": "ChIJd_ZYiMOxt4kRr4jdltEL3_s",
+    "location": {
+      "lat": 38.831038199999995,
+      "lng": -77.05876250000001
+    }
+  },
+  {
+    "name": "Little Birdie VA",
+    "slug": "little-birdie-va",
+    "website": "https://www.littlebirdieva.com/",
+    "onlineOrderUrl": "https://www.littlebirdieva.com/",
+    "placeId": "ChIJiwDa0SGxt4kR9qN_WGnwkyo",
+    "location": {
+      "lat": 38.8201134,
+      "lng": -77.0576987
+    }
+  },
+  {
+    "name": "Pak Soii Izakaya & Bar",
+    "slug": "pak-soii-izakaya-bar",
+    "website": "http://www.paksoiiizakaya.com/",
+    "onlineOrderUrl": "http://www.paksoiiizakaya.com/",
+    "placeId": "ChIJeb5j0F6xt4kR3NecEwi_-kM",
+    "location": {
+      "lat": 38.8235586,
+      "lng": -77.0578975
+    }
+  },
+  {
+    "name": "Mulberry Lane",
+    "slug": "mulberry-lane",
+    "website": "https://www.mulberrylanedmv.com/",
+    "onlineOrderUrl": "https://www.mulberrylanedmv.com/",
+    "placeId": "ChIJp0IFV1ext4kRZ-cN5QvkkHA",
+    "location": {
+      "lat": 38.8244095,
+      "lng": -77.0585024
+    }
+  },
+  {
+    "name": "Shorty’s Deluxe",
+    "slug": "shortys-deluxe",
+    "website": "https://www.shortysdeluxe.com/",
+    "onlineOrderUrl": "https://www.shortysdeluxe.com/",
+    "placeId": "ChIJDU2ZCgCxt4kR7V05XyKBF2E",
+    "location": {
+      "lat": 38.8244846,
+      "lng": -77.05858099999999
+    }
+  },
+  {
+    "name": "Just Fine Donuts",
+    "slug": "just-fine-donuts",
+    "website": "https://www.justfinedonut.com/",
+    "onlineOrderUrl": "https://www.justfinedonut.com/",
+    "placeId": "ChIJte-O1vuxt4kR45vKmWxjAt8",
+    "location": {
+      "lat": 38.8264315,
+      "lng": -77.0589387
+    }
+  },
+  {
+    "name": "The Dairy Godmother",
+    "slug": "the-dairy-godmother",
+    "website": "http://www.thedairygodmother.com/",
+    "onlineOrderUrl": "http://www.thedairygodmother.com/",
+    "placeId": "ChIJ2zVSKCCxt4kRnhSJrasXEew",
+    "location": {
+      "lat": 38.8264352,
+      "lng": -77.0589698
+    }
+  },
+  {
+    "name": "Del Ray Pop Up Bar",
+    "slug": "del-ray-pop-up-bar",
+    "website": "https://www.delrayspopupbar.com/",
+    "onlineOrderUrl": "https://www.delrayspopupbar.com/",
+    "placeId": "ChIJZZ64Gb2xt4kRb8rAaxPZqlc",
+    "location": {
+      "lat": 38.8266664,
+      "lng": -77.0590098
+    }
+  },
+  {
+    "name": "Taqueria Poblano",
+    "slug": "taqueria-poblano",
+    "website": "https://www.taqueriapoblano.com/",
+    "onlineOrderUrl": "https://www.taqueriapoblano.com/",
+    "placeId": "ChIJI6pQLCCxt4kRLe49C7qXRQE",
+    "location": {
+      "lat": 38.8270883,
+      "lng": -77.05912359999999
+    }
+  },
+  {
+    "name": "Del Ray Public House",
+    "slug": "del-ray-public-house",
+    "website": "https://www.delraypublichouse.com/",
+    "onlineOrderUrl": "https://www.delraypublichouse.com/",
+    "placeId": "ChIJKVc0P4uxt4kRemccNDt9dKo",
+    "location": {
+      "lat": 38.8260224,
+      "lng": -77.0588674
+    },
+    "aliasPlaceIds": ["ChIJZV9ahR-xt4kRcmBdxTmTxqE"]
+  },
+  {
+    "name": "The Front Porch",
+    "slug": "front-porch",
+    "website": "http://frontporch.menu/",
+    "onlineOrderUrl": "https://app.frontporch.menu/",
+    "placeId": "ChIJR6Vjsh-xt4kRQlSlGMjaWXg",
+    "location": {
+      "lat": 38.8241762,
+      "lng": -77.05854630000002
+    }
   }
 ]

@@ -1,8 +1,11 @@
 ---
 import restaurants from '../data/restaurants.json';
 
-import BaseLayout from '../layouts/base.astro';
 import Card from '../components/card.astro';
+import BaseLayout from '../layouts/base.astro';
+import { sortSouthToNorth } from '../lib/sort-restaurants';
+
+const ordered = sortSouthToNorth(restaurants);
 ---
 
 <BaseLayout>
@@ -15,7 +18,7 @@ import Card from '../components/card.astro';
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 items-stretch"
   >
     {
-      restaurants.map(restaurant => (
+      ordered.map(restaurant => (
         <li>
           <Card restaurant={restaurant} />
         </li>

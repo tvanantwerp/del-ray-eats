@@ -12,28 +12,37 @@ const imageKey = `../assets/images/${restaurant.slug}.png`;
 const imageLoader = images[imageKey];
 
 if (!imageLoader) {
-  throw new Error(
-    `No image for restaurant "${restaurant.name}" (expected ${imageKey}). ` +
-      `Add src/assets/images/${restaurant.slug}.png.`,
+  console.warn(
+    `Using placeholder for "${restaurant.name}" — add src/assets/images/${restaurant.slug}.png.`,
   );
 }
 
-const { default: image } = await imageLoader();
+const image = imageLoader ? (await imageLoader()).default : null;
 ---
 
 <article
   class="grid drop-shadow-md hover:drop-shadow-lg hover:scale-105 transition-all h-full border border-slate-500 rounded-lg"
   style="grid-template-rows: auto 1fr;"
 >
-  <Picture
-    src={image}
-    alt={`Exterior of ${restaurant.name}`}
-    widths={[400, 800]}
-    sizes="400px"
-    formats={['avif', 'webp']}
-    fallbackFormat="jpeg"
-    class="w-full aspect-[4/3] object-cover rounded-t-lg"
-  />
+  {
+    image ? (
+      <Picture
+        src={image}
+        alt={`Exterior of ${restaurant.name}`}
+        widths={[400, 800]}
+        sizes="400px"
+        formats={['avif', 'webp']}
+        fallbackFormat="jpeg"
+        class="w-full aspect-[4/3] object-cover rounded-t-lg"
+      />
+    ) : (
+      <div class="w-full aspect-[4/3] rounded-t-lg bg-slate-200 dark:bg-slate-700 grid place-items-center">
+        <span class="font-sans text-sm text-slate-500 dark:text-slate-400">
+          Photo coming soon
+        </span>
+      </div>
+    )
+  }
   <div class="grid items-end rounded-b-lg bg-white dark:bg-slate-800 -mt-8">
     <h1
       class="font-heading text-xl text-center text-slate-800 dark:text-slate-100 p-4"
