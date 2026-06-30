@@ -15,7 +15,12 @@ import {
   imageFilesToDelete,
   serializeRestaurants,
 } from './report';
-import type { BusinessStatus, CheckReport, Restaurant } from './types';
+import type {
+  BusinessStatus,
+  CheckReport,
+  IgnoredPlace,
+  Restaurant,
+} from './types';
 
 export interface Effects {
   readRestaurants(): Promise<Restaurant[]>;
@@ -31,6 +36,7 @@ export interface Effects {
 
 export interface CheckDeps {
   readRestaurants(): Promise<Restaurant[]>;
+  readIgnoredPlaces(): Promise<IgnoredPlace[]>;
   log(msg: string): void;
 }
 
@@ -79,11 +85,17 @@ export async function runCheck(
 
   const statuses = new Map<string, BusinessStatus | 'NOT_FOUND'>();
   for (const r of existing) {
-    if (r.placeId)
-      statuses.set(r.placeId, await client.getPlaceStatus(r.placeId));
+    for (const id of [r.placeId, ...(r.aliasPlaceIds ?? [])]) {
+      if (id && !statuses.has(id)) {
+        statuses.set(id, await client.getPlaceStatus(id));
+      }
+    }
   }
 
-  const diff = diffRestaurants(existing, corridor, statuses);
+  const ignored = await deps.readIgnoredPlaces();
+  const ignoredPlaceIds = new Set(ignored.map(i => i.placeId));
+
+  const diff = diffRestaurants(existing, corridor, statuses, ignoredPlaceIds);
   const backfilledSlugs = new Set(diff.backfills.map(b => b.slug));
   const unmatchedExisting = existing.filter(
     r => !r.placeId && !backfilledSlugs.has(r.slug),

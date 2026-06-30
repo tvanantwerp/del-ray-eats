@@ -3,7 +3,12 @@ import { describe, expect, test } from 'vitest';
 import { SEGMENT_END, SEGMENT_START } from './config';
 import type { PlacesClient } from './places-client';
 import { type Effects, runApply, runCheck } from './run';
-import type { BusinessStatus, DiscoveredPlace, Restaurant } from './types';
+import type {
+  BusinessStatus,
+  DiscoveredPlace,
+  IgnoredPlace,
+  Restaurant,
+} from './types';
 
 // A point on the corridor: the midpoint of the avenue segment, derived from
 // config so these fixtures stay valid if the endpoints are recalibrated.
@@ -83,8 +88,9 @@ function padPlaces(n: number): DiscoveredPlace[] {
 }
 
 describe('runCheck', () => {
-  const deps = (existing: Restaurant[]) => ({
+  const deps = (existing: Restaurant[], ignored: IgnoredPlace[] = []) => ({
     readRestaurants: async () => existing,
+    readIgnoredPlaces: async () => ignored,
     log: () => {},
   });
 
@@ -137,6 +143,42 @@ describe('runCheck', () => {
     const client = fakeClient(padPlaces(12), {});
     const report = await runCheck(client, deps(existing));
     expect(report.unmatchedExisting.map(r => r.slug)).toEqual(['ghost']);
+  });
+
+  test('fetches status for alias IDs as well as the primary', async () => {
+    const queried: string[] = [];
+    const client: PlacesClient = {
+      searchNearby: async () => padPlaces(12),
+      getPlaceStatus: async id => {
+        queried.push(id);
+        return 'OPERATIONAL';
+      },
+    };
+    const existing: Restaurant[] = [
+      {
+        name: 'Gustave',
+        slug: 'gustave',
+        website: '',
+        onlineOrderUrl: '',
+        placeId: 'p-main',
+        aliasPlaceIds: ['p-alias'],
+      },
+    ];
+    await runCheck(client, deps(existing));
+    expect(queried).toContain('p-main');
+    expect(queried).toContain('p-alias');
+  });
+
+  test('ignored places never appear as additions', async () => {
+    const client = fakeClient(
+      [...padPlaces(12), place({ placeId: 'p-ign', name: 'Ignore Me' })],
+      {},
+    );
+    const ignored: IgnoredPlace[] = [
+      { placeId: 'p-ign', name: 'Ignore Me', reason: 'test' },
+    ];
+    const report = await runCheck(client, deps([], ignored));
+    expect(report.additions.map(a => a.placeId)).not.toContain('p-ign');
   });
 });
 
