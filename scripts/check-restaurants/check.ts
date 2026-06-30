@@ -1,6 +1,6 @@
 import { writeFileSync } from 'node:fs';
 
-import { readRestaurants } from './effects';
+import { readIgnoredPlaces, readRestaurants } from './effects';
 import { createPlacesClient } from './places-client';
 import { summarizeReport } from './report';
 import { runCheck } from './run';
@@ -18,6 +18,7 @@ async function main(): Promise<void> {
   const client = createPlacesClient(apiKey);
   const report = await runCheck(client, {
     readRestaurants,
+    readIgnoredPlaces,
     log: msg => console.error(msg),
   });
 

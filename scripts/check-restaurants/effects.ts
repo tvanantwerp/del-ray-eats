@@ -4,11 +4,12 @@ import { promisify } from 'node:util';
 
 import { imageFilesToDelete } from './report';
 import type { Effects } from './run';
-import type { Restaurant } from './types';
+import type { IgnoredPlace, Restaurant } from './types';
 
 const execFileAsync = promisify(execFile);
 
 const DATA_PATH = 'src/data/restaurants.json';
+const IGNORED_PATH = 'src/data/ignored-places.json';
 const ISSUE_TITLE = 'Restaurant directory check';
 
 function todayDateSuffix(): string {
@@ -37,6 +38,10 @@ async function findOpenPrNumber(branch: string): Promise<string> {
 
 export async function readRestaurants(): Promise<Restaurant[]> {
   return JSON.parse(await readFile(DATA_PATH, 'utf8')) as Restaurant[];
+}
+
+export async function readIgnoredPlaces(): Promise<IgnoredPlace[]> {
+  return JSON.parse(await readFile(IGNORED_PATH, 'utf8')) as IgnoredPlace[];
 }
 
 export function createRealEffects(): Effects {
