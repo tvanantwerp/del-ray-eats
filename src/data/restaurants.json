@@ -55,18 +55,6 @@
     }
   },
   {
-    "name": "Benny Diforza's",
-    "slug": "benny-diforzas",
-    "website": "https://www.bennysva.com/locations/diforzas/",
-    "onlineOrderUrl": "https://order.spoton.com/bennys-105/alexandria-va/65a07d0c66be7cc0fd08c9bd"
-  },
-  {
-    "name": "French Toast DMV",
-    "slug": "french-toast-dmv",
-    "website": "https://www.frenchtoastdmv.com/",
-    "onlineOrderUrl": "https://www.frenchtoastdmv.com/"
-  },
-  {
     "name": "Junction Bakery & Bistro",
     "slug": "junction",
     "website": "https://www.junctionbakery.com/menus/alexandria/",
@@ -100,12 +88,6 @@
     }
   },
   {
-    "name": "Zuki Moon",
-    "slug": "zuki-moon",
-    "website": "https://www.zukimoon.com/",
-    "onlineOrderUrl": "https://order.toasttab.com/online/zuki-moon"
-  },
-  {
     "name": "Del Ray Café",
     "slug": "del-ray-cafe",
     "website": "https://www.delraycafe.com/our-menus/",
@@ -136,23 +118,6 @@
     "location": {
       "lat": 38.8239957,
       "lng": -77.0584135
-    }
-  },
-  {
-    "name": "Thai Peppers",
-    "slug": "thai-peppers",
-    "website": "https://www.thaipeppersalexandria.com/menu",
-    "onlineOrderUrl": "https://www.thaipeppersalexandria.com/takeout-food-delivery"
-  },
-  {
-    "name": "Del Ray Pizzeria",
-    "slug": "del-ray-pizzeria",
-    "website": "http://www.delraypizzeria.com/#menus",
-    "onlineOrderUrl": "https://www.toasttab.com/del-ray-pizzeria/v3/?mode=fulfillment",
-    "placeId": "ChIJZV9ahR-xt4kRcmBdxTmTxqE",
-    "location": {
-      "lat": 38.8259895,
-      "lng": -77.0587962
     }
   },
   {
@@ -396,7 +361,8 @@
     "location": {
       "lat": 38.8260224,
       "lng": -77.0588674
-    }
+    },
+    "aliasPlaceIds": ["ChIJZV9ahR-xt4kRcmBdxTmTxqE"]
   },
   {
     "name": "The Front Porch",
