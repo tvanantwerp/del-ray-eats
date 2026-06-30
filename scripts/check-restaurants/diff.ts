@@ -50,10 +50,17 @@ export interface DiffResult {
   warnings: string[];
 }
 
+function ownedPlaceIds(r: Restaurant): string[] {
+  return [r.placeId, ...(r.aliasPlaceIds ?? [])].filter((id): id is string =>
+    Boolean(id),
+  );
+}
+
 export function diffRestaurants(
   existing: Restaurant[],
   discovered: DiscoveredPlace[],
   existingStatuses: Map<string, BusinessStatus | 'NOT_FOUND'>,
+  ignoredPlaceIds: Set<string>,
 ): DiffResult {
   const result: DiffResult = {
     additions: [],
@@ -62,16 +69,19 @@ export function diffRestaurants(
     warnings: [],
   };
 
-  const knownPlaceIds = new Set(
-    existing.map(r => r.placeId).filter((id): id is string => Boolean(id)),
-  );
+  const knownPlaceIds = new Set<string>();
+  for (const r of existing) {
+    for (const id of ownedPlaceIds(r)) knownPlaceIds.add(id);
+  }
+
   const matchedDiscoveredIds = new Set<string>();
+  const candidates = discovered.filter(d => !ignoredPlaceIds.has(d.placeId));
 
   // Backfill placeIds for existing entries that lack one, via name match.
   for (const r of existing) {
     if (r.placeId) continue;
     let best: { place: DiscoveredPlace; score: number } | null = null;
-    for (const d of discovered) {
+    for (const d of candidates) {
       const score = nameSimilarity(r.name, d.name);
       if (!best || score > best.score) best = { place: d, score };
     }
@@ -82,29 +92,37 @@ export function diffRestaurants(
     }
   }
 
-  // Closures + warnings, driven by status of existing entries.
+  // Closures + warnings, across each entry's owned (primary + alias) IDs.
   for (const r of existing) {
-    if (!r.placeId) continue;
-    const status = existingStatuses.get(r.placeId);
-    if (status === 'CLOSED_PERMANENTLY') {
+    const owned = ownedPlaceIds(r);
+    if (owned.length === 0) continue;
+    const known = owned
+      .map(id => existingStatuses.get(id))
+      .filter((s): s is BusinessStatus | 'NOT_FOUND' => s !== undefined);
+
+    if (known.length > 0 && known.every(s => s === 'CLOSED_PERMANENTLY')) {
       result.closures.push(r);
-    } else if (status === 'CLOSED_TEMPORARILY') {
+    } else if (known.some(s => s === 'CLOSED_PERMANENTLY')) {
+      result.warnings.push(
+        `${r.slug}: some listings permanently closed but others still active — verify manually.`,
+      );
+    } else if (known.some(s => s === 'CLOSED_TEMPORARILY')) {
       result.warnings.push(
         `${r.slug}: reported CLOSED_TEMPORARILY — not removing, verify manually.`,
       );
-    } else if (status === 'NOT_FOUND') {
+    } else if (known.some(s => s === 'NOT_FOUND')) {
       result.warnings.push(
-        `${r.slug}: placeId ${r.placeId} not found by Places — verify manually.`,
+        `${r.slug}: a placeId was not found by Places — verify manually.`,
       );
-    } else if (!discovered.some(d => d.placeId === r.placeId)) {
+    } else if (!owned.some(id => discovered.some(d => d.placeId === id))) {
       result.warnings.push(
         `${r.slug}: operational but absent from corridor search — verify it has not moved.`,
       );
     }
   }
 
-  // Additions: discovered places not known and not name-matched to existing.
-  for (const d of discovered) {
+  // Additions: candidate places not owned/matched and not name-matched.
+  for (const d of candidates) {
     if (knownPlaceIds.has(d.placeId) || matchedDiscoveredIds.has(d.placeId)) {
       continue;
     }

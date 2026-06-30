@@ -63,7 +63,7 @@ describe('diffRestaurants', () => {
     const statuses = new Map<string, BusinessStatus | 'NOT_FOUND'>([
       ['p-gone', 'CLOSED_PERMANENTLY'],
     ]);
-    const result = diffRestaurants(existing, [], statuses);
+    const result = diffRestaurants(existing, [], statuses, new Set<string>());
     expect(result.closures.map(r => r.slug)).toEqual(['gone']);
     expect(result.additions).toEqual([]);
   });
@@ -77,7 +77,12 @@ describe('diffRestaurants', () => {
     const statuses = new Map<string, BusinessStatus | 'NOT_FOUND'>([
       ['p-keep', 'OPERATIONAL'],
     ]);
-    const result = diffRestaurants(existing, discovered, statuses);
+    const result = diffRestaurants(
+      existing,
+      discovered,
+      statuses,
+      new Set<string>(),
+    );
     expect(result.additions.map(p => p.placeId)).toEqual(['p-new']);
     expect(result.closures).toEqual([]);
   });
@@ -88,7 +93,12 @@ describe('diffRestaurants', () => {
     ];
     const discovered = [place({ placeId: 'p-thai', name: 'Thai Peppers' })];
     const statuses = new Map<string, BusinessStatus | 'NOT_FOUND'>();
-    const result = diffRestaurants(existing, discovered, statuses);
+    const result = diffRestaurants(
+      existing,
+      discovered,
+      statuses,
+      new Set<string>(),
+    );
     expect(result.backfills).toEqual([
       { slug: 'thai-peppers', placeId: 'p-thai' },
     ]);
@@ -106,9 +116,67 @@ describe('diffRestaurants', () => {
       ['p-dropped', 'OPERATIONAL'],
     ]);
     // p-dropped is operational but not in discovered list
-    const result = diffRestaurants(existing, [], statuses);
+    const result = diffRestaurants(existing, [], statuses, new Set<string>());
     expect(result.closures).toEqual([]);
     expect(result.warnings.some(w => w.includes('temp'))).toBe(true);
     expect(result.warnings.some(w => w.includes('dropped'))).toBe(true);
+  });
+
+  describe('diffRestaurants aliases + ignore', () => {
+    test('an alias placeId is not proposed as a new addition', () => {
+      const existing = [
+        restaurant({
+          slug: 'gustave',
+          placeId: 'p-main',
+          aliasPlaceIds: ['p-alias'],
+        }),
+      ];
+      const discovered = [
+        place({ placeId: 'p-main', name: 'Gustave' }),
+        place({ placeId: 'p-alias', name: 'Gustave Le Jardin' }),
+      ];
+      const statuses = new Map<string, BusinessStatus | 'NOT_FOUND'>([
+        ['p-main', 'OPERATIONAL'],
+        ['p-alias', 'OPERATIONAL'],
+      ]);
+      const result = diffRestaurants(existing, discovered, statuses, new Set());
+      expect(result.additions).toEqual([]);
+    });
+
+    test('an ignored placeId is not proposed as a new addition', () => {
+      const discovered = [place({ placeId: 'p-ign', name: '7-Eleven' })];
+      const result = diffRestaurants(
+        [],
+        discovered,
+        new Map(),
+        new Set(['p-ign']),
+      );
+      expect(result.additions).toEqual([]);
+    });
+
+    test('closure only when all owned IDs are permanently closed', () => {
+      const existing = [
+        restaurant({ slug: 'gustave', placeId: 'p-a', aliasPlaceIds: ['p-b'] }),
+      ];
+      const statuses = new Map<string, BusinessStatus | 'NOT_FOUND'>([
+        ['p-a', 'CLOSED_PERMANENTLY'],
+        ['p-b', 'CLOSED_PERMANENTLY'],
+      ]);
+      const result = diffRestaurants(existing, [], statuses, new Set());
+      expect(result.closures.map(r => r.slug)).toEqual(['gustave']);
+    });
+
+    test('a partial close warns instead of removing', () => {
+      const existing = [
+        restaurant({ slug: 'gustave', placeId: 'p-a', aliasPlaceIds: ['p-b'] }),
+      ];
+      const statuses = new Map<string, BusinessStatus | 'NOT_FOUND'>([
+        ['p-a', 'CLOSED_PERMANENTLY'],
+        ['p-b', 'OPERATIONAL'],
+      ]);
+      const result = diffRestaurants(existing, [], statuses, new Set());
+      expect(result.closures).toEqual([]);
+      expect(result.warnings.some(w => w.includes('gustave'))).toBe(true);
+    });
   });
 });

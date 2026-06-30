@@ -14,6 +14,7 @@ export interface Restaurant {
   website: string;
   onlineOrderUrl: string;
   placeId?: string;
+  aliasPlaceIds?: string[];
 }
 
 export interface DiscoveredPlace {
@@ -35,4 +36,10 @@ export interface CheckReport {
   backfills: Array<{ slug: string; placeId: string }>;
   warnings: string[];
   unmatchedExisting: Restaurant[];
+}
+
+export interface IgnoredPlace {
+  placeId: string;
+  name: string;
+  reason: string;
 }
