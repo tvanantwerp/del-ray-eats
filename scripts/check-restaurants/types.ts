@@ -15,6 +15,7 @@ export interface Restaurant {
   onlineOrderUrl: string;
   placeId?: string;
   aliasPlaceIds?: string[];
+  location?: { lat: number; lng: number };
 }
 
 export interface DiscoveredPlace {
