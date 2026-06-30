@@ -24,3 +24,15 @@ export interface DiscoveredPlace {
   website: string | null;
   businessStatus: BusinessStatus;
 }
+
+export interface CheckReport {
+  generatedAt: string;
+  rawCount: number;
+  corridorCount: number;
+  aborted: boolean;
+  additions: DiscoveredPlace[];
+  closures: Restaurant[];
+  backfills: Array<{ slug: string; placeId: string }>;
+  warnings: string[];
+  unmatchedExisting: Restaurant[];
+}

@@ -6,8 +6,9 @@ import {
   buildIssueBody,
   imageFilesToDelete,
   serializeRestaurants,
+  summarizeReport,
 } from './report';
-import type { DiscoveredPlace, Restaurant } from './types';
+import type { CheckReport, DiscoveredPlace, Restaurant } from './types';
 
 const r = (over: Partial<Restaurant>): Restaurant => ({
   name: 'X',
@@ -24,6 +25,19 @@ const d = (over: Partial<DiscoveredPlace>): DiscoveredPlace => ({
   address: '2000 Mount Vernon Ave',
   website: 'https://newspot.com',
   businessStatus: 'OPERATIONAL',
+  ...over,
+});
+
+const report = (over: Partial<CheckReport>): CheckReport => ({
+  generatedAt: '2026-06-29T00:00:00.000Z',
+  rawCount: 48,
+  corridorCount: 43,
+  aborted: false,
+  additions: [],
+  closures: [],
+  backfills: [],
+  warnings: [],
+  unmatchedExisting: [],
   ...over,
 });
 
@@ -61,9 +75,36 @@ describe('serializeRestaurants', () => {
   });
 });
 
+describe('summarizeReport', () => {
+  test('reports counts and an abort notice when aborted', () => {
+    const out = summarizeReport(
+      report({ aborted: true, corridorCount: 3, rawCount: 5 }),
+    );
+    expect(out).toContain('3');
+    expect(out.toLowerCase()).toContain('abort');
+  });
+
+  test('lists additions, backfills, closures, warnings, and unmatched', () => {
+    const out = summarizeReport(
+      report({
+        additions: [d({ name: 'New Spot' })],
+        backfills: [{ slug: 'lenas', placeId: 'p-lenas' }],
+        closures: [r({ name: 'Gone', slug: 'gone' })],
+        warnings: ['thai-peppers: verify'],
+        unmatchedExisting: [r({ name: 'Zuki Moon', slug: 'zuki-moon' })],
+      }),
+    );
+    expect(out).toContain('New Spot');
+    expect(out).toContain('lenas');
+    expect(out).toContain('Gone');
+    expect(out).toContain('thai-peppers: verify');
+    expect(out).toContain('Zuki Moon');
+  });
+});
+
 describe('buildIssueBody', () => {
   test('includes addition name, website, slug suggestion, and placeId', () => {
-    const body = buildIssueBody([d({ name: 'New Spot' })], []);
+    const body = buildIssueBody([d({ name: 'New Spot' })], [], []);
     expect(body).toContain('New Spot');
     expect(body).toContain('https://newspot.com');
     expect(body).toContain('new-spot');
@@ -72,13 +113,28 @@ describe('buildIssueBody', () => {
   });
 
   test('renders warnings section when present', () => {
-    const body = buildIssueBody([], ['thai-peppers: verify manually.']);
+    const body = buildIssueBody([], ['thai-peppers: verify manually.'], []);
     expect(body).toContain('Warnings');
     expect(body).toContain('thai-peppers: verify manually.');
   });
 
   test('states when there is nothing to add', () => {
-    const body = buildIssueBody([], []);
+    const body = buildIssueBody([], [], []);
     expect(body.toLowerCase()).toContain('no new');
+  });
+
+  test('renders an unmatched-existing section when present', () => {
+    const body = buildIssueBody(
+      [],
+      [],
+      [r({ name: 'Zuki Moon', slug: 'zuki-moon' })],
+    );
+    expect(body.toLowerCase()).toContain('manual');
+    expect(body).toContain('Zuki Moon');
+  });
+
+  test('omits the unmatched section when empty', () => {
+    const body = buildIssueBody([d({ name: 'New Spot' })], [], []);
+    expect(body.toLowerCase()).not.toContain('manual review');
   });
 });

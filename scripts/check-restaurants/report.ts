@@ -1,5 +1,5 @@
 import { slugify } from './diff';
-import type { DiscoveredPlace, Restaurant } from './types';
+import type { CheckReport, DiscoveredPlace, Restaurant } from './types';
 
 export function applyClosures(
   restaurants: Restaurant[],
@@ -31,6 +31,7 @@ export function serializeRestaurants(restaurants: Restaurant[]): string {
 export function buildIssueBody(
   additions: DiscoveredPlace[],
   warnings: string[],
+  unmatchedExisting: Restaurant[],
 ): string {
   const lines: string[] = [];
   lines.push('## Restaurant directory check');
@@ -57,6 +58,18 @@ export function buildIssueBody(
     }
   }
 
+  if (unmatchedExisting.length > 0) {
+    lines.push('');
+    lines.push('### Entries needing manual review');
+    lines.push('');
+    lines.push(
+      'These existing restaurants were not found on the strip and have no `placeId` — verify whether they closed or moved:',
+    );
+    lines.push('');
+    for (const r of unmatchedExisting)
+      lines.push(`- ${r.name} (\`${r.slug}\`)`);
+  }
+
   if (warnings.length > 0) {
     lines.push('');
     lines.push('### Warnings');
@@ -65,5 +78,38 @@ export function buildIssueBody(
   }
 
   lines.push('');
+  return lines.join('\n');
+}
+
+export function summarizeReport(report: CheckReport): string {
+  const lines: string[] = [];
+  lines.push(`Restaurant check @ ${report.generatedAt}`);
+  lines.push(
+    `Raw results: ${report.rawCount} | within corridor: ${report.corridorCount}`,
+  );
+  if (report.aborted) {
+    lines.push(
+      `ABORTED: corridor matches below the safety floor — no action would be taken.`,
+    );
+    return lines.join('\n');
+  }
+  lines.push('');
+  lines.push(`Backfills (existing -> placeId): ${report.backfills.length}`);
+  for (const b of report.backfills) lines.push(`  ${b.slug} -> ${b.placeId}`);
+  lines.push('');
+  lines.push(`New candidate additions: ${report.additions.length}`);
+  for (const a of report.additions) lines.push(`  ${a.name} | ${a.address}`);
+  lines.push('');
+  lines.push(`Closures (CLOSED_PERMANENTLY): ${report.closures.length}`);
+  for (const c of report.closures) lines.push(`  ${c.name} (${c.slug})`);
+  lines.push('');
+  lines.push(`Warnings: ${report.warnings.length}`);
+  for (const w of report.warnings) lines.push(`  ${w}`);
+  lines.push('');
+  lines.push(
+    `Existing entries needing manual review: ${report.unmatchedExisting.length}`,
+  );
+  for (const r of report.unmatchedExisting)
+    lines.push(`  ${r.name} (${r.slug})`);
   return lines.join('\n');
 }
