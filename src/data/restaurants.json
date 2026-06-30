@@ -81,10 +81,10 @@
     "placeId": "ChIJS1TgNB6xt4kRBA6GYja2FyY"
   },
   {
-    "name": "Evening Star / Front Porch",
+    "name": "Evening Star",
     "slug": "evening-star",
     "website": "https://www.eveningstarcafe.net/",
-    "onlineOrderUrl": "https://app.frontporch.menu/",
+    "onlineOrderUrl": "https://www.eveningstarcafe.net/",
     "placeId": "ChIJQTUpsx-xt4kRhuKYyACNrgI"
   },
   {
@@ -112,7 +112,8 @@
     "slug": "gustave-boulangerie",
     "website": "https://gustaveboulangerie.com/",
     "onlineOrderUrl": "https://gustaveboulangerie.com/",
-    "placeId": "ChIJ_Yvbazext4kRUooIHHWoBZU"
+    "placeId": "ChIJ_Yvbazext4kRUooIHHWoBZU",
+    "aliasPlaceIds": ["ChIJf0KwLQCxt4kRZU45T9PdiQQ"]
   },
   {
     "name": "Market 2 Market ",
@@ -262,10 +263,10 @@
     "placeId": "ChIJKVc0P4uxt4kRemccNDt9dKo"
   },
   {
-    "name": "Gustave Le Jardin",
-    "slug": "gustave-le-jardin",
-    "website": "https://gustaveboulangerie.com/",
-    "onlineOrderUrl": "https://gustaveboulangerie.com/",
-    "placeId": "ChIJf0KwLQCxt4kRZU45T9PdiQQ"
+    "name": "The Front Porch",
+    "slug": "front-porch",
+    "website": "http://frontporch.menu/",
+    "onlineOrderUrl": "https://app.frontporch.menu/",
+    "placeId": "ChIJR6Vjsh-xt4kRQlSlGMjaWXg"
   }
 ]
