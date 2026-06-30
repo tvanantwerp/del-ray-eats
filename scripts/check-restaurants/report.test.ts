@@ -137,4 +137,14 @@ describe('buildIssueBody', () => {
     const body = buildIssueBody([d({ name: 'New Spot' })], [], []);
     expect(body.toLowerCase()).not.toContain('manual review');
   });
+
+  test('includes each addition coordinate so new entries can be sorted', () => {
+    const body = buildIssueBody(
+      [d({ name: 'New Spot', location: { lat: 38.8203, lng: -77.0579 } })],
+      [],
+      [],
+    );
+    expect(body).toContain('38.8203');
+    expect(body).toContain('-77.0579');
+  });
 });

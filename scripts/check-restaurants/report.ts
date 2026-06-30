@@ -51,6 +51,7 @@ export function buildIssueBody(
       const mapsUrl = `https://maps.google.com/?q=place_id:${a.placeId}`;
       lines.push(`- **${a.name}**`);
       lines.push(`  - Address: ${a.address}`);
+      lines.push(`  - Location: ${a.location.lat}, ${a.location.lng}`);
       lines.push(`  - Website: ${a.website ?? '(none provided)'}`);
       lines.push(`  - Suggested slug: \`${slug}\``);
       lines.push(`  - placeId: \`${a.placeId}\``);
