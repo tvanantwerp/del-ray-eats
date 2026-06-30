@@ -30,8 +30,12 @@ jobs:
           git config user.name "del-ray-eats-bot"
           git config user.email "bot@users.noreply.github.com"
 
-      - name: Run restaurant check
+      - name: Check restaurants (read-only)
         env:
           GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: pnpm restaurants:check
+
+      - name: Apply changes (issue + PRs)
+        env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: pnpm check:restaurants
+        run: pnpm restaurants:apply

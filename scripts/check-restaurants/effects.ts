@@ -35,11 +35,13 @@ async function findOpenPrNumber(branch: string): Promise<string> {
   ]);
 }
 
+export async function readRestaurants(): Promise<Restaurant[]> {
+  return JSON.parse(await readFile(DATA_PATH, 'utf8')) as Restaurant[];
+}
+
 export function createRealEffects(): Effects {
   return {
-    async readRestaurants(): Promise<Restaurant[]> {
-      return JSON.parse(await readFile(DATA_PATH, 'utf8')) as Restaurant[];
-    },
+    readRestaurants,
 
     async writeRestaurants(json: string): Promise<void> {
       await writeFile(DATA_PATH, json, 'utf8');

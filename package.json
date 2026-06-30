@@ -12,7 +12,8 @@
     "generateSW": "SW_DIST_PATH=dist/ workbox generateSW workbox.config.cjs",
     "preview": "astro preview",
     "test": "vitest run",
-    "check:restaurants": "tsx scripts/check-restaurants/main.ts"
+    "restaurants:check": "tsx scripts/check-restaurants/check.ts",
+    "restaurants:apply": "tsx scripts/check-restaurants/apply.ts"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
