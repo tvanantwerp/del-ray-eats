@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { SEGMENT_END, SEGMENT_START } from './config';
 import type { PlacesClient } from './places-client';
-import { type Effects, run } from './run';
+import { type Effects, runApply, runCheck } from './run';
 import type { BusinessStatus, DiscoveredPlace, Restaurant } from './types';
 
 // A point on the corridor: the midpoint of the avenue segment, derived from
@@ -82,30 +82,24 @@ function padPlaces(n: number): DiscoveredPlace[] {
   );
 }
 
-describe('run', () => {
-  test('aborts without removals when too few corridor results', async () => {
-    const existing: Restaurant[] = [
-      {
-        name: 'Gone',
-        slug: 'gone',
-        website: '',
-        onlineOrderUrl: '',
-        placeId: 'p-gone',
-      },
-    ];
-    const client = fakeClient([place({ placeId: 'only', name: 'Only One' })], {
-      'p-gone': 'CLOSED_PERMANENTLY',
-    });
-    const effects = fakeEffects(existing);
-    const result = await run(client, effects);
-
-    expect(result.aborted).toBe(true);
-    expect(effects.written).toHaveLength(0);
-    expect(effects.deleted).toHaveLength(0);
-    expect(effects.prs).toHaveLength(0);
+describe('runCheck', () => {
+  const deps = (existing: Restaurant[]) => ({
+    readRestaurants: async () => existing,
+    log: () => {},
   });
 
-  test('removes a permanently closed restaurant and opens a PR', async () => {
+  test('aborts (no diff) when too few corridor results', async () => {
+    const client = fakeClient(
+      [place({ placeId: 'only', name: 'Only One' })],
+      {},
+    );
+    const report = await runCheck(client, deps([]));
+    expect(report.aborted).toBe(true);
+    expect(report.additions).toEqual([]);
+    expect(report.closures).toEqual([]);
+  });
+
+  test('classifies a permanently closed existing restaurant as a closure', async () => {
     const existing: Restaurant[] = [
       {
         name: 'Gone',
@@ -118,69 +112,58 @@ describe('run', () => {
     const client = fakeClient(padPlaces(12), {
       'p-gone': 'CLOSED_PERMANENTLY',
     });
-    const effects = fakeEffects(existing);
-    const result = await run(client, effects);
-
-    expect(result.aborted).toBe(false);
-    expect(result.closures).toBe(1);
-    expect(effects.deleted).toContain('src/assets/images/gone.png');
-    expect(effects.prs[0]?.map(r => r.slug)).toEqual(['gone']);
-    expect(effects.written[0]).not.toContain('"gone"');
+    const report = await runCheck(client, deps(existing));
+    expect(report.aborted).toBe(false);
+    expect(report.closures.map(c => c.slug)).toEqual(['gone']);
+    expect(report.corridorCount).toBe(12);
   });
 
-  test('filters out-of-corridor discoveries from additions', async () => {
+  test('excludes out-of-corridor places from additions', async () => {
     const farEast = place({
       placeId: 'p-far',
       name: 'Far Away Diner',
       location: offCorridor,
     });
     const client = fakeClient([...padPlaces(12), farEast], {});
-    const effects = fakeEffects([]);
-    const result = await run(client, effects);
-
-    // padPlaces are all in-corridor and become additions; farEast must not.
-    expect(effects.issues[0]).not.toContain('Far Away Diner');
-    expect(result.additions).toBe(12);
+    const report = await runCheck(client, deps([]));
+    expect(report.additions.map(a => a.name)).not.toContain('Far Away Diner');
+    expect(report.additions).toHaveLength(12);
   });
 
-  test('always reports an issue', async () => {
-    const client = fakeClient(padPlaces(12), {});
-    const effects = fakeEffects([]);
-    await run(client, effects);
-    expect(effects.issues).toHaveLength(1);
-  });
-
-  test('backfills only: opens a backfill PR and writes restaurants, but does not open a closure PR', async () => {
+  test('lists existing entries with no placeId and no name match as unmatchedExisting', async () => {
     const existing: Restaurant[] = [
-      {
-        name: 'Found Me',
-        slug: 'found-me',
-        website: '',
-        onlineOrderUrl: '',
-      },
+      { name: 'Ghost Diner', slug: 'ghost', website: '', onlineOrderUrl: '' },
     ];
-    const discovered = [
-      place({ placeId: 'p-found', name: 'Found Me' }),
-      ...padPlaces(12),
-    ];
-    const client = fakeClient(discovered, {});
-    const effects = fakeEffects(existing);
-    const result = await run(client, effects);
+    const client = fakeClient(padPlaces(12), {});
+    const report = await runCheck(client, deps(existing));
+    expect(report.unmatchedExisting.map(r => r.slug)).toEqual(['ghost']);
+  });
+});
 
-    expect(result.aborted).toBe(false);
-    expect(result.closures).toBe(0);
-    expect(result.backfills).toBe(1);
-    expect(effects.backfillPrs).toHaveLength(1);
-    expect(effects.backfillPrs[0]).toEqual([
-      { slug: 'found-me', placeId: 'p-found' },
-    ]);
-    expect(effects.prs).toHaveLength(0);
-    expect(effects.written).toHaveLength(1);
-    expect(effects.written[0]).toContain('p-found');
-    expect(effects.issues).toHaveLength(1);
+describe('runApply', () => {
+  const baseReport = (over: Partial<import('./types').CheckReport>) => ({
+    generatedAt: '2026-06-29T00:00:00.000Z',
+    rawCount: 48,
+    corridorCount: 43,
+    aborted: false,
+    additions: [],
+    closures: [],
+    backfills: [],
+    warnings: [],
+    unmatchedExisting: [],
+    ...over,
   });
 
-  test('closures and backfills together: opens a closure PR (not a backfill PR), and writes restaurants once', async () => {
+  test('does nothing when the report is aborted', async () => {
+    const effects = fakeEffects([]);
+    const result = await runApply(baseReport({ aborted: true }), effects);
+    expect(result.wrote).toBe(false);
+    expect(effects.written).toHaveLength(0);
+    expect(effects.prs).toHaveLength(0);
+    expect(effects.issues).toHaveLength(0);
+  });
+
+  test('removes a closed restaurant, opens a closure PR, always reports an issue', async () => {
     const existing: Restaurant[] = [
       {
         name: 'Gone',
@@ -189,30 +172,31 @@ describe('run', () => {
         onlineOrderUrl: '',
         placeId: 'p-gone',
       },
-      {
-        name: 'Found Me',
-        slug: 'found-me',
-        website: '',
-        onlineOrderUrl: '',
-      },
     ];
-    const discovered = [
-      place({ placeId: 'p-found', name: 'Found Me' }),
-      ...padPlaces(12),
-    ];
-    const client = fakeClient(discovered, {
-      'p-gone': 'CLOSED_PERMANENTLY',
-    });
     const effects = fakeEffects(existing);
-    const result = await run(client, effects);
-
-    expect(result.aborted).toBe(false);
+    const result = await runApply(
+      baseReport({ closures: [existing[0]!] }),
+      effects,
+    );
     expect(result.closures).toBe(1);
-    expect(result.backfills).toBe(1);
-    expect(effects.prs).toHaveLength(1);
+    expect(effects.deleted).toContain('src/assets/images/gone.png');
     expect(effects.prs[0]?.map(r => r.slug)).toEqual(['gone']);
-    expect(effects.backfillPrs).toHaveLength(0);
-    expect(effects.written).toHaveLength(1);
+    expect(effects.written[0]).not.toContain('"gone"');
     expect(effects.issues).toHaveLength(1);
+  });
+
+  test('backfills only: opens a backfill PR, not a closure PR', async () => {
+    const existing: Restaurant[] = [
+      { name: 'Found Me', slug: 'found-me', website: '', onlineOrderUrl: '' },
+    ];
+    const effects = fakeEffects(existing);
+    const result = await runApply(
+      baseReport({ backfills: [{ slug: 'found-me', placeId: 'p-fm' }] }),
+      effects,
+    );
+    expect(result.backfills).toBe(1);
+    expect(effects.backfillPrs).toHaveLength(1);
+    expect(effects.prs).toHaveLength(0);
+    expect(effects.written).toHaveLength(1);
   });
 });

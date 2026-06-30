@@ -15,7 +15,7 @@ import {
   imageFilesToDelete,
   serializeRestaurants,
 } from './report';
-import type { BusinessStatus, Restaurant } from './types';
+import type { BusinessStatus, CheckReport, Restaurant } from './types';
 
 export interface Effects {
   readRestaurants(): Promise<Restaurant[]>;
@@ -29,22 +29,27 @@ export interface Effects {
   log(msg: string): void;
 }
 
-export interface RunResult {
-  additions: number;
-  closures: number;
-  backfills: number;
-  warnings: number;
-  aborted: boolean;
+export interface CheckDeps {
+  readRestaurants(): Promise<Restaurant[]>;
+  log(msg: string): void;
 }
 
-export async function run(
+export interface ApplyResult {
+  wrote: boolean;
+  closures: number;
+  backfills: number;
+  issueReported: boolean;
+}
+
+export async function runCheck(
   client: PlacesClient,
-  effects: Effects,
-): Promise<RunResult> {
-  const existing = await effects.readRestaurants();
+  deps: CheckDeps,
+): Promise<CheckReport> {
+  const generatedAt = new Date().toISOString();
+  const existing = await deps.readRestaurants();
 
   const raw = await client.searchNearby();
-  const discovered = raw.filter(p =>
+  const corridor = raw.filter(p =>
     isWithinCorridor(
       p.location,
       SEGMENT_START,
@@ -53,18 +58,22 @@ export async function run(
       CORRIDOR_END_BUFFER_METERS,
     ),
   );
-  effects.log(`Found ${raw.length} raw, ${discovered.length} within corridor.`);
+  deps.log(`Found ${raw.length} raw, ${corridor.length} within corridor.`);
 
-  if (discovered.length < MIN_EXPECTED_RESULTS) {
-    effects.log(
-      `Only ${discovered.length} corridor results (< ${MIN_EXPECTED_RESULTS}). Aborting without removals.`,
+  if (corridor.length < MIN_EXPECTED_RESULTS) {
+    deps.log(
+      `Only ${corridor.length} corridor results (< ${MIN_EXPECTED_RESULTS}). Marking aborted.`,
     );
     return {
-      additions: 0,
-      closures: 0,
-      backfills: 0,
-      warnings: 0,
+      generatedAt,
+      rawCount: raw.length,
+      corridorCount: corridor.length,
       aborted: true,
+      additions: [],
+      closures: [],
+      backfills: [],
+      warnings: [],
+      unmatchedExisting: [],
     };
   }
 
@@ -74,30 +83,60 @@ export async function run(
       statuses.set(r.placeId, await client.getPlaceStatus(r.placeId));
   }
 
-  const diff = diffRestaurants(existing, discovered, statuses);
-
-  let next = applyBackfills(existing, diff.backfills);
-  if (diff.closures.length > 0) {
-    next = applyClosures(next, diff.closures);
-  }
-
-  if (diff.backfills.length > 0 || diff.closures.length > 0) {
-    await effects.writeRestaurants(serializeRestaurants(next));
-  }
-  if (diff.closures.length > 0) {
-    await effects.deleteImages(imageFilesToDelete(diff.closures));
-    await effects.openClosurePr(diff.closures);
-  } else if (diff.backfills.length > 0) {
-    await effects.openBackfillPr(diff.backfills);
-  }
-
-  await effects.reportIssue(buildIssueBody(diff.additions, diff.warnings));
+  const diff = diffRestaurants(existing, corridor, statuses);
+  const backfilledSlugs = new Set(diff.backfills.map(b => b.slug));
+  const unmatchedExisting = existing.filter(
+    r => !r.placeId && !backfilledSlugs.has(r.slug),
+  );
 
   return {
-    additions: diff.additions.length,
-    closures: diff.closures.length,
-    backfills: diff.backfills.length,
-    warnings: diff.warnings.length,
+    generatedAt,
+    rawCount: raw.length,
+    corridorCount: corridor.length,
     aborted: false,
+    additions: diff.additions,
+    closures: diff.closures,
+    backfills: diff.backfills,
+    warnings: diff.warnings,
+    unmatchedExisting,
+  };
+}
+
+export async function runApply(
+  report: CheckReport,
+  effects: Effects,
+): Promise<ApplyResult> {
+  if (report.aborted) {
+    effects.log('Report marked aborted; taking no action.');
+    return { wrote: false, closures: 0, backfills: 0, issueReported: false };
+  }
+
+  const existing = await effects.readRestaurants();
+  let next = applyBackfills(existing, report.backfills);
+  if (report.closures.length > 0) {
+    next = applyClosures(next, report.closures);
+  }
+
+  let wrote = false;
+  if (report.backfills.length > 0 || report.closures.length > 0) {
+    await effects.writeRestaurants(serializeRestaurants(next));
+    wrote = true;
+  }
+  if (report.closures.length > 0) {
+    await effects.deleteImages(imageFilesToDelete(report.closures));
+    await effects.openClosurePr(report.closures);
+  } else if (report.backfills.length > 0) {
+    await effects.openBackfillPr(report.backfills);
+  }
+
+  await effects.reportIssue(
+    buildIssueBody(report.additions, report.warnings, report.unmatchedExisting),
+  );
+
+  return {
+    wrote,
+    closures: report.closures.length,
+    backfills: report.backfills.length,
+    issueReported: true,
   };
 }
